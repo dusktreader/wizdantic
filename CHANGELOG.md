@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## v0.1.1 - 2026-04-13
+
+Made image link in README.md use the published image on github so pypi will render it.
+
+
 ## v0.1.0 - 2026-04-13
 
 Initial public release. Point it at a Pydantic model and get a fully populated instance back.

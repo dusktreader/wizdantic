@@ -5,7 +5,7 @@
 
 # wizdantic
 
-![wizdantic](docs/source/images/wizdantic-logo.png)
+![wizdantic](https://raw.githubusercontent.com/dusktreader/wizdantic/main/docs/source/images/wizdantic-logo.png)
 
 Conjure populated Pydantic models from thin air with an interactive terminal
 wizard.
