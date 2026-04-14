@@ -1,0 +1,57 @@
+/* Image alignment with text wrapping */
+.md-typeset img[align="right"],
+.md-typeset img.align-right {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.md-typeset img[align="left"],
+.md-typeset img.align-left {
+  float: left;
+  width: 35%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.md-typeset img.float-left {
+  float: left;
+  width: 35%;
+  margin-right: 20px;
+  margin-bottom: 0;
+}
+
+.md-typeset img.float-right {
+  float: right;
+  width: 240px;
+  margin-left: 20px;
+  margin-bottom: 0;
+}
+
+.md-typeset figure[align="right"],
+.md-typeset figure.align-right {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.md-typeset figure[align="left"],
+.md-typeset figure.align-left {
+  float: left;
+  width: 35%;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.md-typeset figure.align-left img,
+.md-typeset figure.align-right img {
+  width: 100%;
+  display: block;
+}
+
+.md-typeset figure figcaption {
+  text-align: center;
+  font-style: italic;
+  margin-top: 8px;
+  font-size: 0.9em;
+}
