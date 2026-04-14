@@ -26,13 +26,13 @@ Define a Pydantic model. Call `run_wizard`. That's it.
 from pydantic import BaseModel, Field
 from wizdantic import run_wizard
 
-class Starship(BaseModel):
-    name: str = Field(description="Ship designation")
-    crew_size: int = Field(description="Number of crew", default=4)
-    hyperdrive_rating: float = Field(description="Hyperdrive class", default=1.0)
-    armed: bool = Field(description="Carries weapons", default=True)
+class Spellbook(BaseModel):
+    name: str = Field(description="Spellbook title")
+    page_count: int = Field(description="Number of pages", default=300)
+    ink_weight_kg: float = Field(description="Weight of enchanted ink in kilograms", default=0.4)
+    cursed: bool = Field(description="Bound with a curse", default=False)
 
-ship = run_wizard(Starship, title="Register a Starship")
+book = run_wizard(Spellbook, title="Register a Spellbook")
 ```
 
 The wizard walks the user through each field, validates input inline, insists on

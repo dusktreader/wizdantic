@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## v0.1.2 - 2026-04-13
+
+Fixed example in README.md.
+
+
 ## v0.1.1 - 2026-04-13
 
 Made image link in README.md use the published image on github so pypi will render it.
