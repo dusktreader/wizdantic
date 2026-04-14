@@ -14,13 +14,13 @@
         <link rel="prev" href="../quickstart/">
       
       
-        <link rel="next" href="../reference/">
+        <link rel="next" href="../demo/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../images/wizdantic-logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -53,13 +53,16 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-  </head>
+  <style>.highlight .gp { user-select: none; color: #89b0c2; }</style>
+</head>
   
   
     
@@ -96,8 +99,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="wizdantic documentation" class="md-header__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -232,8 +234,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="wizdantic documentation" class="md-nav__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     wizdantic documentation
@@ -323,6 +324,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -340,6 +359,300 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scalar-types-str-int-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scalar types (str, int, float)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleans
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lists
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dicts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nested models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-nested-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single nested model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-models-in-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested models in collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom hints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-parsers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom parsers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passthrough-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passthrough types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom title
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wizard-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Wizard class
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsupported-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupported types
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -391,6 +704,262 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scalar-types-str-int-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scalar types (str, int, float)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#booleans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleans
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enums
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lists
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tuples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dicts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nested models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-nested-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single nested model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-models-in-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested models in collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom hints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-parsers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom parsers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passthrough-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passthrough types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom title
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom console
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wizard-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Wizard class
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unsupported-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unsupported types
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -410,6 +979,374 @@
 
 
 <h1 id="features">Features</h1>
+<p><img alt="wizdantic logo" class="float-right" src="../images/wizdantic-logo-2.png" /></p>
+<p>wizdantic inspects your model's type annotations and picks the right prompt
+strategy for each field. Here's everything it supports.</p>
+<h2 id="scalar-types-str-int-float">Scalar types (str, int, float)</h2>
+<p>Plain scalar fields are prompted with a text input. The raw string is passed
+through <code>pydantic.TypeAdapter</code> for validation and coercion.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Spellbook</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="n">title</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Spellbook title&quot;</span><span class="p">)]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="n">page_count</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of pages&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">300</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="n">ink_weight_kg</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Weight of enchanted ink in kilograms&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.4</span>
+</span></code></pre></div></td></tr></table></div>
+<p>If validation fails (for example, typing <code>"three hundred"</code> for an <code>int</code> field),
+the wizard prints the error and re-prompts.</p>
+<h2 id="booleans">Booleans</h2>
+<p>Boolean fields use Rich's <code>Confirm.ask</code>, which accepts <code>y/n</code> input:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">cursed</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bound with a curse&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Optional booleans (<code>bool | None</code>) use a text prompt instead, accepting <code>y</code>, <code>n</code>,
+or blank input (which returns <code>None</code>). A dim hint like <code>(y/n, leave blank for
+none)</code> guides the user.</p>
+<h2 id="enums">Enums</h2>
+<p>Enum fields display a numbered menu. The user can select by typing the index
+number or the enum value/name directly:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">School</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="n">ABJURATION</span> <span class="o">=</span> <span class="s2">&quot;abjuration&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a>    <span class="n">EVOCATION</span> <span class="o">=</span> <span class="s2">&quot;evocation&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="n">NECROMANCY</span> <span class="o">=</span> <span class="s2">&quot;necromancy&quot;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="n">TRANSMUTATION</span> <span class="o">=</span> <span class="s2">&quot;transmutation&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="literals">Literals</h2>
+<p><code>Literal</code> types work the same as enums: a numbered list of allowed values with
+selection by index or exact match:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">rarity</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>    <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;common&quot;</span><span class="p">,</span> <span class="s2">&quot;uncommon&quot;</span><span class="p">,</span> <span class="s2">&quot;rare&quot;</span><span class="p">,</span> <span class="s2">&quot;legendary&quot;</span><span class="p">],</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Spell rarity&quot;</span><span class="p">),</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;common&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="secrets">Secrets</h2>
+<p><code>SecretStr</code> fields are prompted with masked input (Rich's <code>password=True</code>).
+If the field has a default, the wizard shows a row of asterisks matching the
+secret's length as the placeholder. Accepting the placeholder keeps the original
+default value.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">binding_word</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">SecretStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Word of binding for the seal&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Secrets are also masked in the summary table.</p>
+<h2 id="optional-fields">Optional fields</h2>
+<p>Fields annotated as <code>Optional[T]</code> or <code>T | None</code> accept empty input, which the
+wizard interprets as <code>None</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">inscription</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Dedication inscription&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">Empty input behavior</p>
+<p>How the wizard handles empty input (pressing Enter with no text) depends on
+the field's type and default:</p>
+<ul>
+<li><strong>Required, non-optional</strong> (<code>str</code> with no default): the wizard rejects
+  empty input and re-prompts with "A value is required."</li>
+<li><strong>Has a default</strong> (<code>str</code> with <code>= "Merlin"</code>): empty input accepts the
+  default value. The user sees the default in the prompt and pressing Enter
+  keeps it.</li>
+<li><strong>Optional</strong> (<code>str | None</code>): empty input returns <code>None</code>. There is currently
+  no way to set an intentional empty string <code>""</code> on an optional field. This
+  is a known limitation that may be revisited in a future release.</li>
+</ul>
+</div>
+<h2 id="lists">Lists</h2>
+<p><code>list[T]</code> fields accept JSON array or comma-separated input. Each item is
+validated individually through <code>TypeAdapter</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">known_spells</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Spells inscribed in this book&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Typing <code>fireball, frostbolt, blink</code> produces <code>["fireball", "frostbolt", "blink"]</code>.
+JSON input like <code>["fireball", "frostbolt"]</code> also works.</p>
+<p>!!! note "Collection parsing (list, tuple, set)
+    Each of these share common behavior in that the data may be provided in "CSV"
+    mode where each entry is separated by a comma. It may also be provided in "JSON"
+    mode where the data must be provided as a JSON array.</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>For CSV mode, note that leading and trailing whitespaces from each entry are
+stripped from each entry. Spaces may be included in the entry.
+</code></pre></div></td></tr></table></div>
+<h2 id="tuples">Tuples</h2>
+<p>Both homogeneous and fixed-length tuples are supported.</p>
+<p>Homogeneous tuples (<code>tuple[T, ...]</code>) accept JSON array or comma-separated input,
+just like lists:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">ritual_components</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Required ritual components&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Fixed-length tuples (<code>tuple[str, int]</code>) also accept JSON array or comma-separated
+input, but validate that the element count matches exactly. Too few or too many
+values are rejected:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">reagent_dose</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Reagent name and quantity&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Both <code>["mandrake root", 3]</code> and <code>mandrake root, 3</code> are accepted. Providing only
+one value, or three, produces an error.</p>
+<p>Each position is validated against its declared type regardless of input format.</p>
+<h2 id="sets">Sets</h2>
+<p><code>set[T]</code> fields accept JSON array or comma-separated input. Duplicate values are
+rejected with an error rather than silently collapsed:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">affinities</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Elemental affinities&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Typing <code>"fire, water, earth"</code> produces <code>{"fire", "water", "earth"}</code>. JSON input
+like <code>["fire", "water"]</code> also works. Entering <code>"fire, fire"</code> is an error.</p>
+<h2 id="dicts">Dicts</h2>
+<p><code>dict[K, V]</code> fields accept JSON object input or a <code>key:value, key:value</code>
+shorthand notation:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">component_index</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Reagent catalog&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Typing <code>eye of newt:dried, toe of frog:fresh</code> produces
+<code>{"eye of newt": "dried", "toe of frog": "fresh"}</code>. JSON input like
+<code>{"eye of newt": "dried"}</code> also works. The colon-separated notation requires
+exactly one colon per pair; values containing colons (like URLs) need the JSON
+format.</p>
+<h2 id="nested-models">Nested models</h2>
+<h3 id="single-nested-model">Single nested model</h3>
+<p>When a field's type is another <code>BaseModel</code>, the wizard recurses into a
+sub-wizard with a magenta heading. The nested wizard collects all fields of the
+inner model and returns the constructed instance. Any further nesting (a
+<code>BaseModel</code> field inside a nested <code>BaseModel</code>) recurses again, also with a
+magenta heading. All sub-wizard levels use the same color regardless of depth.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Origin</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>    <span class="n">realm</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Realm of origin&quot;</span><span class="p">)]</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a>    <span class="n">tower</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Tower or academy&quot;</span><span class="p">)]</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a>    <span class="n">city</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;City&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Silvermere&quot;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">Spellbook</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a>    <span class="n">provenance</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Origin</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Where this spellbook was scribed&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>The heading for the sub-wizard is taken from the field's <code>description</code> if one is
+provided, falling back to the field name. The sub-wizard shares the same console
+as the parent, so output stays in one stream.</p>
+<h3 id="nested-models-in-collections">Nested models in collections</h3>
+<p>When a field's type is a <em>collection</em> of <code>BaseModel</code>, the wizard enters a collection loop
+to gether the values. Each iteration prints a numbered heading (<code>"Ingredients #1"</code>, <code>"#2"</code>,
+etc.), runs a full sub-wizard for that item, then asks <code>"Add another &lt;label&gt;?"</code>. The loop
+continues until the user declines.</p>
+<p>In this example, the <code>ingredients</code> field is a list of a nested model named <code>Ingredient</code>.
+Thus, a "sub-wizard" will be run for each entry in the list:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span>
+<span class="normal"><a href="#__codelineno-12-7">7</a></span>
+<span class="normal"><a href="#__codelineno-12-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Ingredient</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>    <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ingredient name&quot;</span><span class="p">)]</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>    <span class="n">quantity</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Quantity required&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>    <span class="n">prepared</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Must be prepared in advance&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">Potion</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>    <span class="n">title</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Potion name&quot;</span><span class="p">)]</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>    <span class="n">ingredients</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ingredient</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Ingredients&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>The collected items are returned as a plain <code>list[Ingredient]</code> and the parent
+wizard continues with the next field.</p>
+<p>The same sub-wizard loop is used for <code>tuple[BaseModel, ...]</code>, <code>set[BaseModel]</code>, and
+<code>dict[K, BaseModel]</code> as well. For sets the loop behaves identically to the list
+case. For dicts, each iteration first prompts for a key (as a scalar), then runs
+the sub-wizard for the value.</p>
+<p>Fixed-length tuples with one or more <code>BaseModel</code> positions work differently: there
+is no loop. The wizard prompts each position in order exactly once, running a
+sub-wizard for <code>BaseModel</code> positions and a scalar prompt for all others:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span>
+<span class="normal"><a href="#__codelineno-13-8">8</a></span>
+<span class="normal"><a href="#__codelineno-13-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Coordinates</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4"></a>    <span class="n">x</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;X coordinate&quot;</span><span class="p">)]</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5"></a>    <span class="n">y</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Y coordinate&quot;</span><span class="p">)]</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">Waypoint</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8"></a>    <span class="n">label</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Waypoint label&quot;</span><span class="p">)]</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9"></a>    <span class="n">location</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Coordinates</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Realm, coordinates, and elevation&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Here the wizard prompts position 1 as a scalar (<code>str</code>), runs a sub-wizard for
+position 2 (<code>Coordinates</code>), then prompts position 3 as a scalar (<code>int</code>). No
+"Add another?" — the tuple length is fixed by the type.</p>
+<div class="admonition warning">
+<p class="admonition-title">set[BaseModel] requires a frozen model</p>
+<p>Pydantic models are not hashable by default. To use a <code>BaseModel</code> subclass as
+a set item, mark it frozen:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span>
+<span class="normal"><a href="#__codelineno-14-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigDict</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Reagent</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a>    <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Reagent name&quot;</span><span class="p">)]</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a>    <span class="n">grade</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Purity grade&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;standard&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+<p>wizdantic raises an <code>UnsupportedFieldType</code> at construction time if the model is not frozen,
+so you'll catch the mistake before any prompting begins.</p>
+</div>
+<h2 id="sections">Sections</h2>
+<p>Group related fields under headings using <code>WizardLore</code> in a
+<code>typing.Annotated</code> annotation:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wizdantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">WizardLore</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Spellbook</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a>    <span class="n">scribe_name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name of the scribe&quot;</span><span class="p">),</span> <span class="n">WizardLore</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s2">&quot;Scribe&quot;</span><span class="p">)]</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a>    <span class="n">guild_seal</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Guild seal number&quot;</span><span class="p">),</span> <span class="n">WizardLore</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s2">&quot;Scribe&quot;</span><span class="p">)]</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a>    <span class="n">title</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Title of the spellbook&quot;</span><span class="p">),</span> <span class="n">WizardLore</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="s2">&quot;Contents&quot;</span><span class="p">)]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Fields sharing the same section value are grouped together. Sections are
+rendered in the order they first appear. Unsectioned fields go at the end under
+an "Other" heading (or with no heading if every field has a section).</p>
+<h2 id="custom-hints">Custom hints</h2>
+<p>By default, each prompt type includes a format hint after the label: lists show
+<code>(JSON array or comma-separated)</code>, dicts show
+<code>(JSON object or key:value, key:value)</code>, and so on. You can replace the default
+hint with your own via <code>WizardLore</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span>
+<span class="normal"><a href="#__codelineno-16-3">3</a></span>
+<span class="normal"><a href="#__codelineno-16-4">4</a></span>
+<span class="normal"><a href="#__codelineno-16-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">ritual_components</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a>    <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a>    <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Required ritual components&quot;</span><span class="p">),</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a>    <span class="n">WizardLore</span><span class="p">(</span><span class="n">hint</span><span class="o">=</span><span class="s2">&quot;space-separated list of reagents&quot;</span><span class="p">),</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>The custom hint appears dim after the label, exactly where the auto-generated
+hint would have been.</p>
+<h2 id="custom-parsers">Custom parsers</h2>
+<p>For fields where <code>TypeAdapter</code> is too strict or too loose, <code>WizardLore</code> accepts
+a <code>parser</code> callable that handles the raw string and returns the parsed value. If
+it raises any exception, the wizard shows the error and retries:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span>
+<span class="normal"><a href="#__codelineno-17-7">7</a></span>
+<span class="normal"><a href="#__codelineno-17-8">8</a></span>
+<span class="normal"><a href="#__codelineno-17-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parse_gold</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; gp&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">RitualInscription</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a>    <span class="n">casting_fee</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a>        <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a>        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Casting fee in gold pieces&quot;</span><span class="p">),</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a>        <span class="n">WizardLore</span><span class="p">(</span><span class="n">hint</span><span class="o">=</span><span class="s2">&quot;e.g. 10,000 gp&quot;</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parse_gold</span><span class="p">),</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a>    <span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>After the parser returns its value, the wizard validates it through
+<code>pydantic.TypeAdapter</code> against the field's full annotation -- including any
+type-level constraints like <code>ge</code>, <code>le</code>, <code>min_length</code>, and <code>max_length</code> from
+<code>Field(...)</code>. This means the retry loop catches both bad parser input and
+constraint violations:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span>
+<span class="normal"><a href="#__codelineno-18-4">4</a></span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span>
+<span class="normal"><a href="#__codelineno-18-6">6</a></span>
+<span class="normal"><a href="#__codelineno-18-7">7</a></span>
+<span class="normal"><a href="#__codelineno-18-8">8</a></span>
+<span class="normal"><a href="#__codelineno-18-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">RitualInscription</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a>    <span class="n">casting_fee</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a>        <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a>        <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Casting fee in gold pieces&quot;</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">100_000</span><span class="p">),</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a>        <span class="n">WizardLore</span><span class="p">(</span><span class="n">hint</span><span class="o">=</span><span class="s2">&quot;e.g. 10,000 gp&quot;</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parse_gold</span><span class="p">),</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a>    <span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>If the user types <code>"200,000 gp"</code>, the parser succeeds (returns <code>200000</code>), but
+<code>TypeAdapter</code> immediately rejects it because <code>200000 &gt; 100000</code>, and the wizard
+re-prompts with the constraint error.</p>
+<div class="admonition warning">
+<p class="admonition-title">Field validators don't fire inline</p>
+<p><code>@field_validator</code> decorators are model-scoped: they run when the whole model
+is constructed, not during per-field prompting. Only type-level constraints
+(those encoded in <code>Field(ge=..., le=..., min_length=...,)</code> etc.) are enforced
+inline with retry. If you need custom per-field validation, put the logic in
+your <code>parser</code> function itself.</p>
+</div>
+<p>For optional fields, the blank-check runs before the parser, so empty input still
+returns <code>None</code>.</p>
+<p>Hints and parsers combine freely! Use <code>hint</code> to describe the expected format and
+<code>parser</code> to handle the input.</p>
+<h2 id="passthrough-types">Passthrough types</h2>
+<p>Types like <code>datetime</code>, <code>date</code>, <code>time</code>, <code>UUID</code>, <code>Path</code>, <code>Decimal</code>, and Pydantic
+constrained types (<code>PositiveInt</code>, <code>HttpUrl</code>, <code>constr(max_length=50)</code>, etc.) all
+work through the scalar prompt. <code>TypeAdapter</code> handles coercion from the raw
+string, so ISO 8601 dates, UUID strings, and filesystem paths are all accepted.</p>
+<p>These types don't get specialized format hints by default. If you want the user
+to see a reminder like <code>(YYYY-MM-DD)</code>, attach one via <code>WizardLore(hint=...)</code>.
+Constraint violations (like a negative <code>PositiveInt</code>) surface as the raw Pydantic
+error message and trigger a re-prompt.</p>
+<h2 id="summary-table">Summary table</h2>
+<p>After collecting all values, the wizard prints a Rich table summarizing what
+was entered. Secrets are masked. Nested models are rendered as nested tables
+inside the parent summary cell.</p>
+<p>Disable it by passing <code>show_summary=False</code>:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="custom-title">Custom title</h2>
+<p>Override the wizard heading with the <code>title</code> parameter:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Without a custom title, the wizard derives one from the model class name.</p>
+<h2 id="custom-console">Custom console</h2>
+<p>Pass your own <code>rich.console.Console</code> instance for full control over output
+destination and terminal settings:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="n">console</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="the-wizard-class">The Wizard class</h2>
+<p>For more control, use the <code>Wizard</code> class directly instead of the <code>run_wizard()</code>
+convenience function:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wizdantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Wizard</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">wiz</span> <span class="o">=</span> <span class="n">Wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">wiz</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<p>The class is generic: <code>Wizard[Spellbook]</code> preserves the return type through
+static analysis.</p>
+<h2 id="unsupported-types">Unsupported types</h2>
+<p>Multi-type unions like <code>str | int</code> are not supported. The wizard cannot know
+which branch to prompt for, so it raises an <code>UnsupportedFieldType</code> at construction time with
+a message pointing to the offending field. <code>Optional[T]</code> (i.e. <code>T | None</code>) is
+fine since there's only one concrete branch.</p>
+<p>If you need a union-typed field, use a custom parser via <code>WizardLore</code> to handle
+the ambiguity yourself.</p>
 
 
 
@@ -456,13 +1393,13 @@
         
         
           
-          <a href="../reference/" class="md-footer__link md-footer__link--next" aria-label="Next: Reference">
+          <a href="../demo/" class="md-footer__link md-footer__link--next" aria-label="Next: Demo">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Reference
+                Demo
               </div>
             </div>
             <div class="md-footer__button md-icon">

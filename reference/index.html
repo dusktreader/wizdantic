@@ -11,14 +11,14 @@
         <link rel="canonical" href="http://dusktreader.github.io/wizdantic/reference/">
       
       
-        <link rel="prev" href="../features/">
+        <link rel="prev" href="../demo/">
       
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../images/wizdantic-logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -51,13 +51,16 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-  </head>
+  <style>.highlight .gp { user-select: none; color: #89b0c2; }</style>
+</head>
   
   
     
@@ -76,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wizdantic-reference" class="md-skip">
+        <a href="#api-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -94,8 +97,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="wizdantic documentation" class="md-header__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -230,8 +232,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="wizdantic documentation" class="md-nav__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     wizdantic documentation
@@ -336,6 +337,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -399,13 +427,302 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#wizdantic" class="md-nav__link">
+  <a href="#public-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        wizdantic
+        Public API
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Public API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.run_wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_wizard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wizard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wizard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.print_aborted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_aborted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.print_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.WizardLore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardLore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.console.WizardConsole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardConsole
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WizardConsole">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.console.WizardConsole.input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        input
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.exceptions.WizardAborted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardAborted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.exceptions.UnsupportedFieldType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UnsupportedFieldType
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lore-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lore utilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lore utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_hint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-introspection-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type introspection utilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type introspection utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_optional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_tuple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_literal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_literal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.is_unsupported_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_unsupported_union
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -444,13 +761,302 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#wizdantic" class="md-nav__link">
+  <a href="#public-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        wizdantic
+        Public API
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Public API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.run_wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_wizard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wizard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wizard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.print_aborted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_aborted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.print_summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print_summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.wizard.Wizard.run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.WizardLore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardLore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.console.WizardConsole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardConsole
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WizardConsole">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.console.WizardConsole.input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        input
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.exceptions.WizardAborted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WizardAborted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.exceptions.UnsupportedFieldType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UnsupportedFieldType
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lore-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lore utilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lore utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_section
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_hint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_hint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.lore.extract_parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_parser
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-introspection-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type introspection utilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type introspection utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_optional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_tuple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.unwrap_literal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unwrap_literal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wizdantic.type_utils.is_unsupported_union" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_unsupported_union
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -474,20 +1080,395 @@
   
 
 
-<h1 id="wizdantic-reference">wizdantic Reference</h1>
+<h1 id="api-reference">API Reference</h1>
+<h2 id="public-api">Public API</h2>
 
 
-<div class="doc doc-object doc-module">
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.wizard.run_wizard" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.wizard.run_wizard</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">run_wizard</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">model_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">_ModelT</span><span class="p">],</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="o">*</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">console</span><span class="p">:</span> <span class="n">Console</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">show_summary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ModelT</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Run an interactive wizard and return a populated model instance.</p>
+<p>This is a convenience wrapper around <code>Wizard(...).run()</code>.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>model_class</code>
+            </td>
+            <td>
+                  <code><span title="type">type</span>[<span title="wizdantic.wizard._ModelT">_ModelT</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The Pydantic model class to populate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>console</code>
+            </td>
+            <td>
+                  <code><span title="rich.console.Console">Console</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rich console for output. A new one is created if omitted.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>title</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Heading displayed at the top of the wizard.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>show_summary</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Show a summary table after collection. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
 
 
 
-<h3 id="wizdantic" class="doc doc-heading">
-            <span class="doc doc-object-name doc-module-name">wizdantic</span>
+<h3 id="wizdantic.wizard.Wizard" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">wizdantic.wizard.Wizard</span>
 
 
 </h3>
 
+
     <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.Generic">Generic</span>[<span title="wizdantic.wizard._ModelT">_ModelT</span>]</code></p>
+
+
+
+        <p>Walks the user through each field of a Pydantic model, collecting and
+validating values interactively via Rich prompts.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>model_class</code>
+            </td>
+            <td>
+                  <code><span title="type">type</span>[<span title="wizdantic.wizard._ModelT">_ModelT</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The Pydantic model class to populate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>console</code>
+            </td>
+            <td>
+                  <code><span title="rich.console.Console">Console</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rich console for output. A new one is created if omitted.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>title</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Heading displayed at the top of the wizard.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>show_summary</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Show a summary table after collection. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="wizdantic.wizard.Wizard.print_aborted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">print_aborted</span>
+
+
+</h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">print_aborted</span><span class="p">(</span><span class="n">dep</span><span class="p">:</span> <span class="n">DoExceptParams</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Print a clean abort message when the user interrupts the wizard.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="wizdantic.wizard.Wizard.print_summary" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">print_summary</span>
+
+
+</h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">print_summary</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">BaseModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Print a Rich table summarizing all collected field values.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="wizdantic.wizard.Wizard.run" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">run</span>
+
+
+</h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">run</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">_ModelT</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Execute the wizard and return a validated model instance.</p>
+<p>Raises <code>WizardAborted</code> if the user presses Ctrl+C at any point.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="wizdantic.lore.WizardLore" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">wizdantic.lore.WizardLore</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+
+
+
+        <p>Annotation metadata for controlling wizard behavior on a field.</p>
+<p>Attach to a field via <code>typing.Annotated</code> alongside pydantic's <code>Field</code>:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>name: Annotated[str, Field(description=&quot;Hunter name&quot;), WizardLore(section=&quot;Identity&quot;)]
+</code></pre></div></td></tr></table></div>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>section</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Group this field under a named heading in the wizard.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>hint</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Display text shown dim after the label. When provided, it
+     replaces any auto-generated format hint (e.g. <code>(comma-separated)</code>).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>parser</code>
+            </td>
+            <td>
+                  <code><span title="collections.abc.Callable">Callable</span>[[<span title="str">str</span>], <span title="typing.Any">Any</span>] | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Custom callable <code>(str) -&gt; T</code> used instead of <code>TypeAdapter</code>
+     for this field. Any exception raised by the parser is caught,
+     displayed, and the prompt retried.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
 
 
 
@@ -512,6 +1493,516 @@
 
 
   </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="wizdantic.console.WizardConsole" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">wizdantic.console.WizardConsole</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="rich.console.Console">Console</span></code></p>
+
+
+
+        <p>Rich Console subclass that uses prompt_toolkit for input.</p>
+<p>Replaces the default <code>input()</code> call with a prompt_toolkit <code>PromptSession</code>,
+which provides arrow-key line editing, input history via up/down, and
+reverse-i-search (Ctrl+R) out of the box. Rich's <code>Prompt.ask</code> and
+<code>Confirm.ask</code> call <code>console.input()</code> internally, so swapping in this
+subclass gives every wizard prompt proper terminal editing for free.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="wizdantic.console.WizardConsole.input" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">input</span>
+
+
+</h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">input</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">object</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="o">*</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">markup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">emoji</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">password</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">stream</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Prompt for input using prompt_toolkit instead of builtin <code>input()</code>.</p>
+<p>Rich renders the prompt text (with markup and emoji) to the terminal,
+then this method hands off to prompt_toolkit for the actual keystroke
+handling. Password prompts fall back to <code>getpass</code> since prompt_toolkit
+prompt with <code>is_password=True</code> would conflict with Rich's rendering.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>prompt</code>
+            </td>
+            <td>
+                  <code><span title="object">object</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The prompt text (may contain Rich markup).</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>markup</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to interpret Rich markup in the prompt.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>emoji</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to interpret emoji codes in the prompt.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>password</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to mask input (delegates to <code>getpass</code>).</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>stream</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional input stream override.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="exceptions">Exceptions</h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="wizdantic.exceptions.WizardAborted" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">wizdantic.exceptions.WizardAborted</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="buzz.Buzz">Buzz</span></code></p>
+
+
+
+        <p>Raised when the user aborts the wizard with a keyboard interrupt.</p>
+<p>Callers that need to distinguish a clean abort from other errors can
+catch this exception specifically. The message is always a short,
+human-readable explanation suitable for display in a terminal.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="wizdantic.exceptions.UnsupportedFieldType" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">wizdantic.exceptions.UnsupportedFieldType</span>
+
+
+</h3>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="buzz.Buzz">Buzz</span></code>, <code><span title="TypeError">TypeError</span></code></p>
+
+
+
+        <p>Raised at <code>Wizard</code> construction time when a field's type cannot be prompted for.</p>
+<p>This covers multi-type unions (e.g. <code>str | int</code>) and non-frozen BaseModel
+items in sets. Inherits from <code>TypeError</code> for backward compatibility with
+code that catches <code>TypeError</code> from field validation.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div><h2 id="lore-utilities">Lore utilities</h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.lore.extract_section" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.lore.extract_section</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">extract_section</span><span class="p">(</span><span class="n">field_info</span><span class="p">:</span> <span class="n">FieldInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Find the wizard section for a field by scanning its <code>Annotated</code> metadata
+for a <code>WizardLore</code> instance.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.lore.extract_hint" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.lore.extract_hint</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">extract_hint</span><span class="p">(</span><span class="n">field_info</span><span class="p">:</span> <span class="n">FieldInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Find the user-supplied hint for a field by scanning its <code>Annotated</code>
+metadata for a <code>WizardLore</code> instance.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.lore.extract_parser" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.lore.extract_parser</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">extract_parser</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">field_info</span><span class="p">:</span> <span class="n">FieldInfo</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Find the custom parser for a field by scanning its <code>Annotated</code> metadata
+for a <code>WizardLore</code> instance.</p>
+
+
+    </div>
+
+</div><h2 id="type-introspection-utilities">Type introspection utilities</h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_optional" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_optional</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_optional</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>Optional[T]</code> (or <code>T | None</code>) and return the inner type.</p>
+<p>Returns the unwrapped inner type if the annotation is optional,
+or <code>None</code> if it is not. Callers typically unwrap first so they can
+inspect or validate the inner type independently while still
+supporting <code>None</code> as a valid value.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_list" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_list</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_list</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>list[T]</code> and return the item type.</p>
+<p>Returns the item type if the annotation is a parameterized list,
+<code>str</code> if it is a bare <code>list</code>, or <code>None</code> if the annotation is not a list.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_tuple" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_tuple</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_tuple</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>tuple[T, ...]</code> or <code>tuple[T1, T2, ...]</code> and return item types.</p>
+<p>Returns a two-element tuple of <code>(item_types, is_homogeneous)</code>:</p>
+<ul>
+<li>For homogeneous <code>tuple[T, ...]</code>: <code>([T], True)</code></li>
+<li>For fixed-length <code>tuple[T1, T2, T3]</code>: <code>([T1, T2, T3], False)</code></li>
+<li>For bare <code>tuple</code>: <code>([str], True)</code></li>
+<li>For non-tuples: <code>None</code></li>
+</ul>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>annotation</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The type annotation to inspect.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_set" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_set</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_set</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>set[T]</code> and return the item type.</p>
+<p>Returns the item type if the annotation is a parameterized set,
+<code>str</code> if it is a bare <code>set</code>, or <code>None</code> if the annotation is not a set.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_dict" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_dict</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_dict</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>dict[K, V]</code> and return the key and value types.</p>
+<p>Returns <code>(key_type, value_type)</code> if the annotation is a parameterized
+dict, <code>(str, str)</code> for a bare <code>dict</code>, or <code>None</code> if it is not a dict.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.unwrap_literal" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.unwrap_literal</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">unwrap_literal</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect <code>Literal["a", "b", ...]</code> and return the allowed values.</p>
+<p>Returns a tuple of the literal values, or <code>None</code> if the annotation
+is not a <code>Literal</code>.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="wizdantic.type_utils.is_unsupported_union" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">wizdantic.type_utils.is_unsupported_union</span>
+
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">is_unsupported_union</span><span class="p">(</span><span class="n">annotation</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Detect multi-type unions that wizdantic cannot prompt for.</p>
+<p><code>Optional[T]</code> (i.e. <code>T | None</code>) is supported and returns <code>False</code>.
+Any other union of two or more concrete types (e.g. <code>str | int</code>) returns
+<code>True</code> because there is no way to know which branch to prompt for.</p>
+
 
     </div>
 
@@ -545,7 +2036,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../features/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Features">
+          <a href="../demo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Demo">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -555,7 +2046,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Features
+                Demo
               </div>
             </div>
           </a>

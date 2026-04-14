@@ -20,7 +20,7 @@
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../images/wizdantic-logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -53,13 +53,16 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-  </head>
+  <style>.highlight .gp { user-select: none; color: #89b0c2; }</style>
+</head>
   
   
     
@@ -96,8 +99,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="wizdantic documentation" class="md-header__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -232,8 +234,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="wizdantic documentation" class="md-nav__button md-logo" aria-label="wizdantic documentation" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../images/wizdantic-logo.png" alt="logo">
 
     </a>
     wizdantic documentation
@@ -366,30 +367,35 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-from-pypi" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-wizard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install from pypi:
+        Your first wizard
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using" class="md-nav__link">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using
+        What's next?
       
     </span>
   </a>
@@ -419,6 +425,33 @@
     
   
     Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo
   
 
     
@@ -504,30 +537,35 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-from-pypi" class="md-nav__link">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-wizard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install from pypi:
+        Your first wizard
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using" class="md-nav__link">
+  <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Using
+        What's next?
       
     </span>
   </a>
@@ -557,14 +595,71 @@
 <h1 id="quickstart">Quickstart</h1>
 <h2 id="requirements">Requirements</h2>
 <ul>
-<li>Python 3.12 to 3.14</li>
+<li>Python 3.12 or later</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<h3 id="install-from-pypi">Install from pypi:</h3>
-<p>This will install the latest release from pypi via pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>wizdantic
-</span></code></pre></div>
-<h2 id="using">Using</h2>
+<p>Install from PyPI:</p>
+<div data-copy="pip install wizdantic" class="highlight shell-ps1"><pre><span></span><code><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>wizdantic
+</code></pre></div>
+
+<p>Or with <code>uv</code>:</p>
+<div data-copy="uv add wizdantic" class="highlight shell-ps1"><pre><span></span><code><span class="gp">$ </span>uv<span class="w"> </span>add<span class="w"> </span>wizdantic
+</code></pre></div>
+
+<h2 id="your-first-wizard">Your first wizard</h2>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">wizard.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wizdantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_wizard</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">Spellbook</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a>    <span class="n">title</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Spellbook title&quot;</span><span class="p">)]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="n">page_count</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Number of pages&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">300</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>    <span class="n">ink_weight_kg</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Weight of enchanted ink in kilograms&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.4</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a>    <span class="n">cursed</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bound with a curse&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registered: </span><span class="si">{</span><span class="n">spellbook</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">spellbook</span><span class="o">.</span><span class="n">page_count</span><span class="si">}</span><span class="s2"> pages)&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Then run it:</p>
+<div data-copy="python wizard.py" class="highlight shell-ps1"><pre><span></span><code><span class="gp">$ </span>python<span class="w"> </span>wizard.py
+</code></pre></div>
+
+<p>When you run this, the wizard walks through each field in order:</p>
+<ol>
+<li><strong><code>title</code></strong> is required (no default), so the wizard insists on a value.</li>
+<li><strong><code>page_count</code></strong> shows <code>300</code> as the default. Press Enter to accept it or type a
+   new number.</li>
+<li><strong><code>ink_weight_kg</code></strong> and <strong><code>cursed</code></strong> work the same way, with <code>0.4</code> and
+   <code>False</code> as defaults.</li>
+</ol>
+<p>After the last field, a summary table is printed and you get back a validated
+<code>Spellbook</code> instance.</p>
+<h2 id="validation">Validation</h2>
+<p>Every value is validated inline using Pydantic's <code>TypeAdapter</code>. If you type
+<code>"twelve"</code> for <code>page_count</code>, the wizard shows an error and re-prompts
+immediately. No partial models, no deferred validation.</p>
+<h2 id="whats-next">What's next?</h2>
+<ul>
+<li><a href="../features/">Features</a>: all supported field types (enums, literals, secrets, optional fields, lists, nested models, and section grouping).</li>
+<li><a href="../demo/">Demo</a>: see wizdantic in action before writing any code.</li>
+</ul>
 
 
 
