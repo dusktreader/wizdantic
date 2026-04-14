@@ -5,21 +5,40 @@
 
 # wizdantic
 
-_Gather values for a pydantic model via a wizard_
+![wizdantic](docs/source/images/wizdantic-logo.png)
 
+Conjure populated Pydantic models from thin air with an interactive terminal
+wizard.
 
-## Super-quick Start
+## Super-quick start
 
-Requires: Python 3.12 to 3.14
-
-Install through pip:
+Requires Python 3.12+.
 
 ```bash
 pip install wizdantic
 ```
 
+## Usage
+
+Define a Pydantic model. Call `run_wizard`. That's it.
+
+```python
+from pydantic import BaseModel, Field
+from wizdantic import run_wizard
+
+class Starship(BaseModel):
+    name: str = Field(description="Ship designation")
+    crew_size: int = Field(description="Number of crew", default=4)
+    hyperdrive_rating: float = Field(description="Hyperdrive class", default=1.0)
+    armed: bool = Field(description="Carries weapons", default=True)
+
+ship = run_wizard(Starship, title="Register a Starship")
+```
+
+The wizard walks the user through each field, validates input inline, insists on
+required values, pre-fills defaults, and returns a fully constructed model
+instance.
 
 ## Documentation
 
-The complete documentation can be found at the
-[wizdantic home page](https://dusktreader.github.io/wizdantic)
+Full documentation at [dusktreader.github.io/wizdantic](https://dusktreader.github.io/wizdantic/).

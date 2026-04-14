@@ -1,0 +1,127 @@
+[project]
+name = "wizdantic"
+version = "0.1.0"
+description = "Collect values for a pydantic model via a wizard"
+authors = [
+    {name = "Tucker Beck", email ="tucker.beck@gmail.com"},
+]
+readme = "README.md"
+license-files = ["LICENSE.md"]
+
+requires-python = ">=3.12"
+keywords = [
+    "pydantic",
+    "wizard",
+    "cli",
+    "interactive",
+    "prompt",
+    "terminal",
+    "form",
+    "validation",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Terminals",
+    "Typing :: Typed",
+]
+dependencies = [
+    "inflection>=0.5.1",
+    "prompt-toolkit>=3.0",
+    "py-buzz>=8.1.1",
+    "pydantic>=2.0",
+    "rich>=13.0",
+    "snick>=3.1.0",
+]
+
+
+[project.urls]
+homepage = "https://github.com/dusktreader/wizdantic"
+repository = "https://github.com/dusktreader/wizdantic"
+documentation = "https://dusktreader.github.io/wizdantic"
+source = "https://github.com/dusktreader/wizdantic"
+changelog = "https://github.com/dusktreader/wizdantic/blob/main/CHANGELOG.md"
+
+
+[project.optional-dependencies]
+demo = [
+    "auto-name-enum>=4.1.0",
+    "typer>=0.15",
+]
+
+
+[project.scripts]
+wizdantic-demo = "wizdantic_demo.main:main"
+
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8",
+    "ipython>=8.18",
+    "mkdocs-material>=9.6",
+    "mkdocstrings[python]>=0.29",
+    "superfences-ps1>=0.1.0",
+    "pyclean>=3.1",
+    "pygments>=2.19",
+    "pytest>=8.3",
+    "pytest-bdd>=7.0",
+    "pytest-cov>=6.0",
+    "pytest-mock>=3.14",
+    "pytest-pretty>=1.2",
+    "pytest-random-order>=1.1",
+    "ruff>=0.11",
+    "ty>=0.0",
+    "typos>=1.31",
+]
+
+
+[tool.uv]
+package = true
+
+
+[tool.uv.build-backend]
+module-name = ["wizdantic", "wizdantic_demo"]
+module-root = "src"
+
+
+[tool.pytest.ini_options]
+addopts = [
+    "--random-order",
+    "--cov=src/wizdantic",
+    "--cov-report=term-missing",
+    "--cov-fail-under=85",
+    "--cov-report=xml:.coverage.xml",
+    "--junitxml=.junit.xml",
+    "--override-ini=junit_family=legacy",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_steps.py"]
+markers = [
+    "integration: Integration tests that exercise the real package with no mocking",
+    "unit: Fast unit tests with all external dependencies mocked",
+]
+
+
+[tool.ruff]
+line-length = 120
+src = ["src/wizdantic", "src/wizdantic_demo", "tests", "examples"]
+
+
+[tool.ruff.format]
+docstring-code-format = true
+
+
+[tool.typos.default]
+extend-ignore-identifiers-re = []
+
+
+[build-system]
+requires = ["uv-build>=0.1.0,<0.11"]
+build-backend = "uv_build"
