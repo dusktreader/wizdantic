@@ -111,7 +111,7 @@ known_spells: Annotated[list[str], Field(description="Spells inscribed in this b
 Typing `fireball, frostbolt, blink` produces `["fireball", "frostbolt", "blink"]`.
 JSON input like `["fireball", "frostbolt"]` also works.
 
-!!! note "Collection parsing (list, tuple, set)
+!!! note "Collection parsing (list, tuple, set)"
     Each of these share common behavior in that the data may be provided in "CSV"
     mode where each entry is separated by a comma. It may also be provided in "JSON"
     mode where the data must be provided as a JSON array.
@@ -201,7 +201,7 @@ as the parent, so output stays in one stream.
 ### Nested models in collections
 
 When a field's type is a _collection_ of `BaseModel`, the wizard enters a collection loop
-to gether the values. Each iteration prints a numbered heading (`"Ingredients #1"`, `"#2"`,
+to gather the values. Each iteration prints a numbered heading (`"Ingredients #1"`, `"#2"`,
 etc.), runs a full sub-wizard for that item, then asks `"Add another <label>?"`. The loop
 continues until the user declines.
 
@@ -369,6 +369,61 @@ These types don't get specialized format hints by default. If you want the user
 to see a reminder like `(YYYY-MM-DD)`, attach one via `WizardLore(hint=...)`.
 Constraint violations (like a negative `PositiveInt`) surface as the raw Pydantic
 error message and trigger a re-prompt.
+
+
+## Instance seeding
+
+Pass an existing model instance via the `instance` parameter to pre-fill every
+prompt with the instance's current values. The user can accept all defaults
+unchanged, change individual fields, or change everything. A new model instance
+is always returned; the original is never modified.
+
+```python
+existing = Spellbook(
+    title="Grimoire of Embers",
+    page_count=412,
+    ink_weight_kg=0.6,
+    cursed=True,
+)
+
+# Every prompt opens pre-filled with the values from `existing`.
+revised = run_wizard(Spellbook, instance=existing, title="Revise Spellbook")
+```
+
+This is useful any time you want to let users review and selectively update a
+model they already have: loading a saved configuration, editing a record fetched
+from a database, or re-running a wizard with the previous session's answers as
+the starting point.
+
+Instance values take priority over a field's declared `default` or
+`default_factory`. So if your field has `default=300` but the instance has
+`page_count=412`, the prompt will show `412`.
+
+Nested `BaseModel` fields propagate the seeding into their sub-wizards. Each
+field of the nested model is pre-filled from the corresponding value on the
+existing nested instance:
+
+```python
+class Sanctum(BaseModel):
+    name: str = Field(description="Sanctum name")
+    realm: str = Field(description="Realm it resides in")
+
+class Archmage(BaseModel):
+    name: str = Field(description="Name")
+    sanctum: Sanctum = Field(description="Primary sanctum")
+
+existing = Archmage(name="Valdris Mourn", sanctum=Sanctum(name="The Ashen Vault", realm="Gloomreach"))
+
+# The sub-wizard for `sanctum` opens with "The Ashen Vault" and "Gloomreach" pre-filled.
+updated = run_wizard(Archmage, instance=existing)
+```
+
+!!! note "Collections are not seeded"
+    Instance seeding does not apply to fields whose type is a collection of
+    `BaseModel` (`list[BaseModel]`, `set[BaseModel]`, etc.). Those fields always
+    start their sub-wizard loop fresh. Scalar collection fields (`list[str]`,
+    `dict[str, int]`, etc.) do receive the instance value as their pre-filled
+    default string.
 
 
 ## Summary table

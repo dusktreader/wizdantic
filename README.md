@@ -3,12 +3,13 @@
 [![Build Status](https://github.com/dusktreader/wizdantic/actions/workflows/main.yml/badge.svg)](https://github.com/dusktreader/wizdantic/actions/workflows/main.yml)
 [![Documentation Status](https://github.com/dusktreader/wizdantic/actions/workflows/docs.yml/badge.svg)](https://dusktreader.github.io/wizdantic/)
 
+
 # wizdantic
 
 ![wizdantic](https://raw.githubusercontent.com/dusktreader/wizdantic/main/docs/source/images/wizdantic-logo.png)
 
-Conjure populated Pydantic models from thin air with an interactive terminal
-wizard.
+Conjure populated Pydantic models from thin air with an interactive terminal wizard.
+
 
 ## Super-quick start
 
@@ -17,6 +18,7 @@ Requires Python 3.12+.
 ```bash
 pip install wizdantic
 ```
+
 
 ## Usage
 
@@ -35,9 +37,22 @@ class Spellbook(BaseModel):
 book = run_wizard(Spellbook, title="Register a Spellbook")
 ```
 
-The wizard walks the user through each field, validates input inline, insists on
-required values, pre-fills defaults, and returns a fully constructed model
-instance.
+The wizard walks the user through each field, validates input inline, insists on required values, pre-fills defaults,
+and returns a fully constructed model instance.
+
+
+## Try the demo
+
+The fastest way to see wizdantic in action is to run the interactive demo. No
+install required:
+
+```bash
+uvx --from=wizdantic[demo] wizdantic-demo
+```
+
+The demo walks through every supported field type, one spell at a time. Each spell shows the model definition and a
+plain-English description, then drops you into a live wizard.
+
 
 ## Documentation
 

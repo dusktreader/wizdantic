@@ -1390,3 +1390,175 @@ class TestFormatDisplay:
 
     def test_bool_value(self):
         assert self._wiz()._format_display(True) == "True"
+
+
+class TestWizardInstance:
+    """Wizard pre-fills prompts from an existing model instance."""
+
+    def test_scalar_fields_use_instance_values_as_defaults(self, mocker, console):
+        existing = MageProfile(name="Elara Nighthollow", mana_reserve=5000, has_familiar=False)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Elara Nighthollow", "5000"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=False)
+
+        result = run_wizard(MageProfile, instance=existing, console=console, show_summary=False)
+
+        assert result.name == "Elara Nighthollow"
+        assert result.mana_reserve == 5000
+        assert result.has_familiar is False
+
+    def test_instance_value_overrides_field_declared_default(self, mocker, console):
+        """Instance value wins over the field's declared default when both exist."""
+        existing = MageProfile(name="Grimshaw", mana_reserve=1, has_familiar=False)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Grimshaw", "1"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=False)
+
+        result = run_wizard(MageProfile, instance=existing, console=console, show_summary=False)
+
+        assert result.mana_reserve == 1
+        assert result.has_familiar is False
+
+    def test_user_can_override_instance_value(self, mocker, console):
+        """The user can still type a different value even when an instance default is set."""
+        existing = MageProfile(name="Elara Nighthollow", mana_reserve=5000, has_familiar=False)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Theron the Ashen", "9999"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=True)
+
+        result = run_wizard(MageProfile, instance=existing, console=console, show_summary=False)
+
+        assert result.name == "Theron the Ashen"
+        assert result.mana_reserve == 9999
+        assert result.has_familiar is True
+
+    def test_nested_model_instance_seeds_sub_wizard(self, mocker, console):
+        """Instance values on a nested BaseModel field flow into the sub-wizard."""
+
+        class Realm(BaseModel):
+            name: str = Field(description="Realm name")
+            region: str = Field(description="Region", default="Embervault")
+
+        class Mage(BaseModel):
+            title: str = Field(description="Title")
+            homeworld: Realm = Field(description="Home realm")
+
+        existing = Mage(title="Archmage", homeworld=Realm(name="Thornspire", region="Gloomreach"))
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["Archmage", "Thornspire", "Gloomreach"],
+        )
+
+        result = run_wizard(Mage, instance=existing, console=console, show_summary=False)
+
+        assert result.title == "Archmage"
+        assert result.homeworld.name == "Thornspire"
+        assert result.homeworld.region == "Gloomreach"
+
+    def test_no_instance_behaves_as_before(self, mocker, console):
+        """When instance is omitted, the wizard uses declared field defaults as usual."""
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Veyra", "10000"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=True)
+
+        result = run_wizard(MageProfile, console=console, show_summary=False)
+
+        assert result.name == "Veyra"
+        assert result.mana_reserve == 10000
+        assert result.has_familiar is True
+
+    def test_returns_new_instance_not_mutated_original(self, mocker, console):
+        """The wizard always returns a fresh model; the input instance is untouched."""
+        existing = MageProfile(name="Elara Nighthollow", mana_reserve=5000, has_familiar=False)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Grimshaw", "1"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=True)
+
+        result = run_wizard(MageProfile, instance=existing, console=console, show_summary=False)
+
+        assert result is not existing
+        assert existing.name == "Elara Nighthollow"
+        assert existing.mana_reserve == 5000
+
+    def test_enum_field_uses_instance_value_as_default(self, mocker, console):
+        """Instance enum values are passed as defaults to EnumPrompt."""
+        existing = BountyHunter(
+            name="Grimshaw",
+            faction=Faction.ARCANE,
+            targets=[],
+            homeworld=Realm(name="Thornspire Tower"),
+        )
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["Grimshaw", "1", "", "Thornspire Tower", "Outer Rim"],
+        )
+
+        result = run_wizard(BountyHunter, instance=existing, console=console, show_summary=False)
+
+        assert result.faction == Faction.ARCANE
+
+    def test_optional_field_with_instance_value(self, mocker, console):
+        """Instance values for optional fields are passed as defaults."""
+        existing = OptionalFields(nickname="Ashbrand", bounty=750)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Ashbrand", "750"])
+
+        result = run_wizard(OptionalFields, instance=existing, console=console, show_summary=False)
+
+        assert result.nickname == "Ashbrand"
+        assert result.bounty == 750
+
+    def test_optional_field_with_instance_none_value(self, mocker, console):
+        """An instance value of None on an optional field still shows None as default."""
+        existing = OptionalFields(nickname=None, bounty=None)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["", ""])
+
+        result = run_wizard(OptionalFields, instance=existing, console=console, show_summary=False)
+
+        assert result.nickname is None
+        assert result.bounty is None
+
+    def test_secret_field_uses_instance_value_as_default(self, mocker, console):
+        """Instance SecretStr values surface as the masked placeholder default."""
+        existing = Warlock(shadow_name="Mordain the Hollow", true_name=SecretStr("ashthorn"), power_level=8500.0)
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["Mordain the Hollow", "*" * len("ashthorn"), "8500.0"],
+        )
+
+        result = run_wizard(Warlock, instance=existing, console=console, show_summary=False)
+
+        assert result.true_name.get_secret_value() == "ashthorn"
+
+    def test_list_field_uses_instance_value_as_default(self, mocker, console):
+        """Instance list values are serialised as the comma-separated default."""
+        existing = BountyHunter(
+            name="Grimshaw",
+            faction=Faction.SHADOW,
+            targets=["Veyra", "Elara"],
+            homeworld=Realm(name="Thornspire Tower"),
+        )
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["Grimshaw", "2", "Veyra, Elara", "Thornspire Tower", "Outer Rim"],
+        )
+
+        result = run_wizard(BountyHunter, instance=existing, console=console, show_summary=False)
+
+        assert result.targets == ["Veyra", "Elara"]
+
+    def test_literal_field_uses_instance_value_as_default(self, mocker, console):
+        """Instance Literal values are passed as defaults to LiteralPrompt."""
+        existing = SpeedSetting(mode="volatile")
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["1"])
+
+        result = run_wizard(SpeedSetting, instance=existing, console=console, show_summary=False)
+
+        assert result.mode == "volatile"
+
+    def test_wizard_class_accepts_instance_parameter(self, mocker, console):
+        """Wizard(..., instance=...) wires through correctly without run_wizard."""
+        existing = MageProfile(name="Elara Nighthollow", mana_reserve=200, has_familiar=True)
+        mocker.patch("wizdantic.prompts.Prompt.ask", side_effect=["Elara Nighthollow", "200"])
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=True)
+
+        wiz = Wizard(MageProfile, instance=existing, console=console, show_summary=False)
+        result = wiz.run()
+
+        assert result.name == "Elara Nighthollow"
+        assert result.mana_reserve == 200
+        assert result.has_familiar is True
