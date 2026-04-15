@@ -568,6 +568,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#instance-seeding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instance seeding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary-table" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -904,6 +915,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#instance-seeding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instance seeding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary-table" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1061,14 +1083,14 @@ validated individually through <code>TypeAdapter</code>:</p>
 </span></code></pre></div></td></tr></table></div>
 <p>Typing <code>fireball, frostbolt, blink</code> produces <code>["fireball", "frostbolt", "blink"]</code>.
 JSON input like <code>["fireball", "frostbolt"]</code> also works.</p>
-<p>!!! note "Collection parsing (list, tuple, set)
-    Each of these share common behavior in that the data may be provided in "CSV"
-    mode where each entry is separated by a comma. It may also be provided in "JSON"
-    mode where the data must be provided as a JSON array.</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>For CSV mode, note that leading and trailing whitespaces from each entry are
-stripped from each entry. Spaces may be included in the entry.
-</code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Collection parsing (list, tuple, set)</p>
+<p>Each of these share common behavior in that the data may be provided in "CSV"
+mode where each entry is separated by a comma. It may also be provided in "JSON"
+mode where the data must be provided as a JSON array.</p>
+<p>For CSV mode, note that leading and trailing whitespaces from each entry are
+stripped from each entry. Spaces may be included in the entry.</p>
+</div>
 <h2 id="tuples">Tuples</h2>
 <p>Both homogeneous and fixed-length tuples are supported.</p>
 <p>Homogeneous tuples (<code>tuple[T, ...]</code>) accept JSON array or comma-separated input,
@@ -1126,7 +1148,7 @@ provided, falling back to the field name. The sub-wizard shares the same console
 as the parent, so output stays in one stream.</p>
 <h3 id="nested-models-in-collections">Nested models in collections</h3>
 <p>When a field's type is a <em>collection</em> of <code>BaseModel</code>, the wizard enters a collection loop
-to gether the values. Each iteration prints a numbered heading (<code>"Ingredients #1"</code>, <code>"#2"</code>,
+to gather the values. Each iteration prints a numbered heading (<code>"Ingredients #1"</code>, <code>"#2"</code>,
 etc.), runs a full sub-wizard for that item, then asks <code>"Add another &lt;label&gt;?"</code>. The loop
 continues until the user declines.</p>
 <p>In this example, the <code>ingredients</code> field is a list of a nested model named <code>Ingredient</code>.
@@ -1304,39 +1326,104 @@ string, so ISO 8601 dates, UUID strings, and filesystem paths are all accepted.<
 to see a reminder like <code>(YYYY-MM-DD)</code>, attach one via <code>WizardLore(hint=...)</code>.
 Constraint violations (like a negative <code>PositiveInt</code>) surface as the raw Pydantic
 error message and trigger a re-prompt.</p>
+<h2 id="instance-seeding">Instance seeding</h2>
+<p>Pass an existing model instance via the <code>instance</code> parameter to pre-fill every
+prompt with the instance's current values. The user can accept all defaults
+unchanged, change individual fields, or change everything. A new model instance
+is always returned; the original is never modified.</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span>
+<span class="normal"><a href="#__codelineno-19-6">6</a></span>
+<span class="normal"><a href="#__codelineno-19-7">7</a></span>
+<span class="normal"><a href="#__codelineno-19-8">8</a></span>
+<span class="normal"><a href="#__codelineno-19-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">existing</span> <span class="o">=</span> <span class="n">Spellbook</span><span class="p">(</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Grimoire of Embers&quot;</span><span class="p">,</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>    <span class="n">page_count</span><span class="o">=</span><span class="mi">412</span><span class="p">,</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>    <span class="n">ink_weight_kg</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a>    <span class="n">cursed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="p">)</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="c1"># Every prompt opens pre-filled with the values from `existing`.</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="n">revised</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">existing</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Revise Spellbook&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>This is useful any time you want to let users review and selectively update a
+model they already have: loading a saved configuration, editing a record fetched
+from a database, or re-running a wizard with the previous session's answers as
+the starting point.</p>
+<p>Instance values take priority over a field's declared <code>default</code> or
+<code>default_factory</code>. So if your field has <code>default=300</code> but the instance has
+<code>page_count=412</code>, the prompt will show <code>412</code>.</p>
+<p>Nested <code>BaseModel</code> fields propagate the seeding into their sub-wizards. Each
+field of the nested model is pre-filled from the corresponding value on the
+existing nested instance:</p>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sanctum</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Sanctum name&quot;</span><span class="p">)</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>    <span class="n">realm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Realm it resides in&quot;</span><span class="p">)</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">Archmage</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a>    <span class="n">sanctum</span><span class="p">:</span> <span class="n">Sanctum</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Primary sanctum&quot;</span><span class="p">)</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="n">existing</span> <span class="o">=</span> <span class="n">Archmage</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Valdris Mourn&quot;</span><span class="p">,</span> <span class="n">sanctum</span><span class="o">=</span><span class="n">Sanctum</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;The Ashen Vault&quot;</span><span class="p">,</span> <span class="n">realm</span><span class="o">=</span><span class="s2">&quot;Gloomreach&quot;</span><span class="p">))</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="c1"># The sub-wizard for `sanctum` opens with &quot;The Ashen Vault&quot; and &quot;Gloomreach&quot; pre-filled.</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="n">updated</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Archmage</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">existing</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Collections are not seeded</p>
+<p>Instance seeding does not apply to fields whose type is a collection of
+<code>BaseModel</code> (<code>list[BaseModel]</code>, <code>set[BaseModel]</code>, etc.). Those fields always
+start their sub-wizard loop fresh. Scalar collection fields (<code>list[str]</code>,
+<code>dict[str, int]</code>, etc.) do receive the instance value as their pre-filled
+default string.</p>
+</div>
 <h2 id="summary-table">Summary table</h2>
 <p>After collecting all values, the wizard prints a Rich table summarizing what
 was entered. Secrets are masked. Nested models are rendered as nested tables
 inside the parent summary cell.</p>
 <p>Disable it by passing <code>show_summary=False</code>:</p>
-<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="custom-title">Custom title</h2>
 <p>Override the wizard heading with the <code>title</code> parameter:</p>
-<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">)</span>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Without a custom title, the wizard derives one from the model class name.</p>
 <h2 id="custom-console">Custom console</h2>
 <p>Pass your own <code>rich.console.Console</code> instance for full control over output
 destination and terminal settings:</p>
-<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
-<span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span>
-<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="n">console</span><span class="p">)</span>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">run_wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">console</span><span class="o">=</span><span class="n">console</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="the-wizard-class">The Wizard class</h2>
 <p>For more control, use the <code>Wizard</code> class directly instead of the <code>run_wizard()</code>
 convenience function:</p>
-<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
-<span class="normal"><a href="#__codelineno-22-2">2</a></span>
-<span class="normal"><a href="#__codelineno-22-3">3</a></span>
-<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wizdantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Wizard</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2"></a>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">wiz</span> <span class="o">=</span> <span class="n">Wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">wiz</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wizdantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Wizard</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="n">wiz</span> <span class="o">=</span> <span class="n">Wizard</span><span class="p">(</span><span class="n">Spellbook</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Register a Spellbook&quot;</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="n">spellbook</span> <span class="o">=</span> <span class="n">wiz</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
 <p>The class is generic: <code>Wizard[Spellbook]</code> preserves the return type through
 static analysis.</p>
