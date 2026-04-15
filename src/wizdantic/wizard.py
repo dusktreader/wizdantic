@@ -50,6 +50,7 @@ _ModelT = TypeVar("_ModelT", bound=BaseModel)
 def run_wizard(
     model_class: type[_ModelT],
     *,
+    instance: _ModelT | None = None,
     console: Console | None = None,
     title: str | None = None,
     show_summary: bool = True,
@@ -61,12 +62,20 @@ def run_wizard(
 
     Parameters:
         model_class:  The Pydantic model class to populate.
+        instance:     An existing model instance whose field values are used as
+                      defaults. When provided, each prompt is pre-filled with
+                      the current value on the instance rather than the field's
+                      declared default.
         console:      Rich console for output. A new one is created if omitted.
         title:        Heading displayed at the top of the wizard.
         show_summary: Show a summary table after collection. Defaults to True.
+
+    Returns:
+        A validated instance of `model_class` populated with the collected values.
     """
     return Wizard(
         model_class,
+        instance=instance,
         console=console,
         title=title,
         show_summary=show_summary,
@@ -80,6 +89,10 @@ class Wizard(Generic[_ModelT]):
 
     Parameters:
         model_class:  The Pydantic model class to populate.
+        instance:     An existing model instance whose field values are used as
+                      defaults. When provided, each prompt is pre-filled with
+                      the current value on the instance rather than the field's
+                      declared default.
         console:      Rich console for output. A new one is created if omitted.
         title:        Heading displayed at the top of the wizard.
         show_summary: Show a summary table after collection. Defaults to True.
@@ -89,11 +102,13 @@ class Wizard(Generic[_ModelT]):
         self,
         model_class: type[_ModelT],
         *,
+        instance: _ModelT | None = None,
         console: Console | None = None,
         title: str | None = None,
         show_summary: bool = True,
     ):
         self.model_class = model_class
+        self._instance = instance
         self.console = console or WizardConsole()
         self.title = title
         self.show_summary = show_summary
@@ -217,6 +232,9 @@ class Wizard(Generic[_ModelT]):
         Execute the wizard and return a validated model instance.
 
         Raises `WizardAborted` if the user presses Ctrl+C at any point.
+
+        Returns:
+            A validated instance of `model_class` populated with the collected values.
         """
         with WizardAborted.handle_errors(
             "Wizard aborted by user",
@@ -229,11 +247,11 @@ class Wizard(Generic[_ModelT]):
             self.print_summary(model)
         return model
 
-    def _sub_wizard(self, model_cls: type[BaseModel]) -> BaseModel:
+    def _sub_wizard(self, model_cls: type[BaseModel], nested_instance: BaseModel | None = None) -> BaseModel:
         """
         Run a sub-wizard for a nested model, sharing the parent's console.
         """
-        return Wizard(model_cls, console=self.console, show_summary=False)._run()
+        return Wizard(model_cls, instance=nested_instance, console=self.console, show_summary=False)._run()
 
     def _run(self) -> _ModelT:
         values: dict[str, Any] = {}
@@ -280,6 +298,7 @@ class Wizard(Generic[_ModelT]):
         name: str,
         description: str | None,
         model_cls: type[BaseModel],
+        nested_instance: BaseModel | None = None,
     ) -> BaseModel:
         """
         Print a heading and run a sub-wizard for a single nested BaseModel field.
@@ -288,7 +307,7 @@ class Wizard(Generic[_ModelT]):
             self.print_title(description, titleize=True, style="magenta")
         else:
             self.print_title(name, style="magenta")
-        return self._sub_wizard(model_cls)
+        return self._sub_wizard(model_cls, nested_instance=nested_instance)
 
     def _prompt_nested_collection(
         self,
@@ -391,6 +410,8 @@ class Wizard(Generic[_ModelT]):
         effective_annotation = inner if is_opt else annotation
 
         default = field_info.get_default(call_default_factory=True)
+        if self._instance is not None:
+            default = getattr(self._instance, name, default)
         label = self._make_label(name, field_info.description)
         required = not is_opt and default is PydanticUndefined
 
@@ -475,7 +496,8 @@ class Wizard(Generic[_ModelT]):
 
         # nested BaseModel
         if isinstance(effective_annotation, type) and issubclass(effective_annotation, BaseModel):
-            return self._prompt_nested_model(name, field_info.description, effective_annotation)
+            nested_instance = default if isinstance(default, BaseModel) else None
+            return self._prompt_nested_model(name, field_info.description, effective_annotation, nested_instance)
 
         if effective_annotation is bool:
             return BoolPrompt(

@@ -30,14 +30,15 @@ wizdantic-demo
 The demo opens with a chapter listing and asks whether to open the spellbook.
 Each chapter covers a different category of field type:
 
-| Chapter               | What it covers                              |
-|-----------------------|---------------------------------------------|
-| `scalar-types`        | Strings, integers, floats, and booleans     |
-| `choices`             | Enum and Literal field selection            |
-| `optional-and-secret` | Optional fields and masked secrets          |
-| `collections`         | Lists, tuples, sets, and dicts              |
-| `nested-models`       | Nested `BaseModel` and `list[BaseModel]`    |
-| `wizard-lore`         | Sections, custom hints, and custom parsers  |
+| Chapter               | What it covers                                          |
+|-----------------------|---------------------------------------------------------|
+| `scalar-types`        | Strings, integers, floats, and booleans                 |
+| `choices`             | Enum and Literal field selection                        |
+| `optional-and-secret` | Optional fields and masked secrets                      |
+| `collections`         | Lists, tuples, sets, and dicts                          |
+| `nested-models`       | Nested `BaseModel` and `list[BaseModel]`                |
+| `wizard-lore`         | Sections, custom hints, and custom parsers              |
+| `instance-seeding`    | Pre-filling prompts from an existing model instance     |
 
 Within each chapter, individual spells show the model definition and a plain-
 English description of what's being demonstrated, then drop you straight into

@@ -8,8 +8,6 @@
 
 ::: wizdantic.lore.WizardLore
 
-::: wizdantic.console.WizardConsole
-
 
 ## Exceptions
 
@@ -18,7 +16,17 @@
 ::: wizdantic.exceptions.UnsupportedFieldType
 
 
-## Lore utilities
+## Internals
+
+The following are implementation details. They are not part of the guaranteed public API and may change
+between minor versions.
+
+### Console
+
+::: wizdantic.console.WizardConsole
+
+
+### Lore utilities
 
 ::: wizdantic.lore.extract_section
 
@@ -27,7 +35,7 @@
 ::: wizdantic.lore.extract_parser
 
 
-## Type introspection utilities
+### Type introspection utilities
 
 ::: wizdantic.type_utils.unwrap_optional
 

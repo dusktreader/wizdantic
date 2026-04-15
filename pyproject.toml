@@ -1,6 +1,6 @@
 [project]
 name = "wizdantic"
-version = "0.1.2"
+version = "0.2.0"
 description = "Collect values for a pydantic model via a wizard"
 authors = [
     {name = "Tucker Beck", email ="tucker.beck@gmail.com"},
@@ -20,7 +20,7 @@ keywords = [
     "validation",
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -46,8 +46,8 @@ dependencies = [
 homepage = "https://github.com/dusktreader/wizdantic"
 repository = "https://github.com/dusktreader/wizdantic"
 documentation = "https://dusktreader.github.io/wizdantic"
-source = "https://github.com/dusktreader/wizdantic"
 changelog = "https://github.com/dusktreader/wizdantic/blob/main/CHANGELOG.md"
+issues = "https://github.com/dusktreader/wizdantic/issues"
 
 
 [project.optional-dependencies]
@@ -123,5 +123,5 @@ extend-ignore-identifiers-re = []
 
 
 [build-system]
-requires = ["uv-build>=0.1.0,<0.11"]
+requires = ["uv-build>=0.1.0"]
 build-backend = "uv_build"

@@ -31,6 +31,7 @@ class Feature(AutoNameEnum, LowerCaseMixin):
     COLLECTIONS = autodoc(description="Lists, tuples, sets, and dicts")
     NESTED_MODELS = autodoc(description="Nested BaseModel and list[BaseModel]")
     WIZARD_LORE = autodoc(description="Sections, custom hints, and custom parsers")
+    INSTANCE_SEEDING = autodoc(description="Pre-filling prompts from an existing model instance")
 
 
 def start(

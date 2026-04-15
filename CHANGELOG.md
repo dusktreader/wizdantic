@@ -5,17 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+
+## v0.2.0 - 2026-04-14
+
+### Added
+
+- `instance` parameter to `Wizard` and `run_wizard` to seed prompts from an existing model instance; each
+  field's current value becomes the prompt default and a fresh instance is always returned.
 
 
 ## v0.1.2 - 2026-04-13
 
-Fixed example in README.md.
+### Fixed
+
+- Fixed example in README.md.
 
 
 ## v0.1.1 - 2026-04-13
 
-Made image link in README.md use the published image on github so pypi will render it.
+### Fixed
+
+- Made image link in README.md use the published image on GitHub so PyPI renders it.
 
 
 ## v0.1.0 - 2026-04-13

@@ -14,7 +14,7 @@ class Spellbook(BaseModel):
     """
     A basic model describing a spell book.
 
-    This example demonstrates basic wizdantic funcitionality.
+    This example demonstrates basic wizdantic functionality.
     """
 
     title: str = Field(description="Spellbook title")
