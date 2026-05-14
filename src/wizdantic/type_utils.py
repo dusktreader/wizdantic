@@ -101,9 +101,7 @@ def unwrap_dict(annotation: Any) -> tuple[Any, Any] | None:
     origin = get_origin(annotation)
     if origin is dict:
         args = get_args(annotation)
-        if args:
-            return (args[0], args[1])
-        return (str, str)
+        return (args[0], args[1])
     if annotation is dict:
         return (str, str)
     return None

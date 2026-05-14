@@ -4,6 +4,9 @@ Prompt strategies for each supported field type.
 Each `WizardPrompt` subclass knows how to prompt for, parse, and validate
 a single field value. The `Wizard` constructs the appropriate subclass and
 calls `prompt()` to collect the value.
+
+`prompt_picker` is the default picker: it wraps `rich.prompt.Prompt.ask` to
+satisfy the `(PickerContext) -> str` contract used throughout the wizard.
 """
 
 from abc import ABC, abstractmethod
@@ -11,6 +14,7 @@ from collections.abc import Callable
 from enum import Enum
 from typing import Any
 
+import inflection
 import pydantic
 from pydantic import SecretStr
 from pydantic_core import PydanticUndefined
@@ -18,6 +22,7 @@ from rich.console import Console
 from rich.prompt import Confirm, Prompt
 
 from wizdantic.constants import INDENT
+from wizdantic.lore import PickerContext
 from wizdantic.type_utils import (
     parse_csv_fixed_tuple,
     parse_csv_sequence,
@@ -98,6 +103,30 @@ def validated_parser(
             raise ValueError(msg) from exc
 
     return _validated
+
+
+def prompt_picker(ctx: PickerContext) -> str:
+    """
+    Default picker: wraps `rich.prompt.Prompt.ask` to satisfy the
+    `(PickerContext) -> str` contract.
+
+    This is the picker used when no field-level `WizardLore(picker=...)` is
+    set and no `Wizard(default_picker=...)` is provided.  Custom pickers
+    (e.g. Textual TUI apps) can replace it per-field or for the whole wizard.
+
+    Parameters:
+        ctx: The standardised picker context supplied by the wizard.
+
+    Returns:
+        The raw string entered by the user.
+    """
+    label = ctx.description or inflection.titleize(ctx.name)
+    if ctx.hint:
+        label = apply_hint(label, ctx.hint)
+    kwargs: dict[str, Any] = {}
+    if ctx.default is not None and ctx.default is not PydanticUndefined:
+        kwargs["default"] = str(ctx.default)
+    return Prompt.ask(f"{INDENT}{label}", **kwargs)
 
 
 class WizardPrompt(ABC):

@@ -32,6 +32,7 @@ class Feature(AutoNameEnum, LowerCaseMixin):
     NESTED_MODELS = autodoc(description="Nested BaseModel and list[BaseModel]")
     WIZARD_LORE = autodoc(description="Sections, custom hints, and custom parsers")
     INSTANCE_SEEDING = autodoc(description="Pre-filling prompts from an existing model instance")
+    PICKERS = autodoc(description="Custom pickers: default_picker and a Textual TUI picker")
 
 
 def start(

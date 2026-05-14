@@ -39,6 +39,7 @@ Each chapter covers a different category of field type:
 | `nested-models`       | Nested `BaseModel` and `list[BaseModel]`                |
 | `wizard-lore`         | Sections, custom hints, and custom parsers              |
 | `instance-seeding`    | Pre-filling prompts from an existing model instance     |
+| `pickers`             | Custom pickers: `default_picker` and a Textual TUI      |
 
 Within each chapter, individual spells show the model definition and a plain-
 English description of what's being demonstrated, then drop you straight into

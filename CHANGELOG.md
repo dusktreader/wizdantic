@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## Unreleased
+
+
+## v0.3.0 - 2026-05-14
+
+### Added
+
+- `PickerContext` dataclass passed to every picker callable, carrying `name`, `description`, `default`, and `hint`.
+- `default_picker` parameter on `Wizard` and `run_wizard` to replace the built-in `Prompt.ask` for all fields.
+- `echo_picker` parameter on `Wizard` and `run_wizard` to print the picker's returned value back to the console.
+- `WizardLore(picker=...)` to attach a field-level picker that overrides `default_picker` for that field.
+- `WizardLore(echo=...)` to override `echo_picker` on a per-field basis (`True` or `False`).
+- `prompt_picker` exported from `wizdantic.prompts` — the built-in picker backed by `Prompt.ask`.
+- `PICKERS` demo chapter in `wizdantic_demo` with a `plain_input_picker` example and a Textual TUI picker.
+- `textual` added as a `demo` optional dependency.
+
+### Fixed
+
+- Removed unreachable defensive fallback branch in `unwrap_dict` (`type_utils.py`).
+- Removed unreachable defensive fallback branch in the `lore_parser` block of `_prompt_field` (`wizard.py`).
+- Replaced opaque ternary-as-condition for picker echo resolution with a named `echo` variable.
+- Fixed `PickerContext` docstring to open triple-quotes on their own line.
+
+
 ## v0.2.0 - 2026-04-14
 
 ### Added
