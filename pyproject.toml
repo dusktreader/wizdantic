@@ -1,6 +1,6 @@
 [project]
 name = "wizdantic"
-version = "0.2.0"
+version = "0.3.0"
 description = "Collect values for a pydantic model via a wizard"
 authors = [
     {name = "Tucker Beck", email ="tucker.beck@gmail.com"},
@@ -53,6 +53,7 @@ issues = "https://github.com/dusktreader/wizdantic/issues"
 [project.optional-dependencies]
 demo = [
     "auto-name-enum>=4.1.0",
+    "textual>=0.80",
     "typer>=0.15",
 ]
 
@@ -96,7 +97,7 @@ addopts = [
     "--random-order",
     "--cov=src/wizdantic",
     "--cov-report=term-missing",
-    "--cov-fail-under=85",
+    "--cov-fail-under=100",
     "--cov-report=xml:.coverage.xml",
     "--junitxml=.junit.xml",
     "--override-ini=junit_family=legacy",

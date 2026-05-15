@@ -3,7 +3,15 @@ from typing import Annotated
 import pytest
 from pydantic import BaseModel
 
-from wizdantic.lore import WizardLore, extract_hint, extract_parser, extract_section
+from wizdantic.lore import (
+    PickerContext,
+    WizardLore,
+    extract_echo,
+    extract_hint,
+    extract_parser,
+    extract_picker,
+    extract_section,
+)
 
 
 class TestWizardLore:
@@ -38,6 +46,29 @@ class TestWizardLore:
         lore = WizardLore(section="Identity", hint="a hint")
         with pytest.raises(Exception):
             lore.hint = "changed"  # type: ignore
+
+    def test_picker_field(self):
+        def my_picker(ctx: PickerContext) -> str:
+            return "red"
+
+        lore = WizardLore(picker=my_picker)
+        assert lore.picker is my_picker
+
+    def test_default_picker_is_none(self):
+        lore = WizardLore()
+        assert lore.picker is None
+
+    def test_echo_field_true(self):
+        lore = WizardLore(echo=True)
+        assert lore.echo is True
+
+    def test_echo_field_false(self):
+        lore = WizardLore(echo=False)
+        assert lore.echo is False
+
+    def test_default_echo_is_none(self):
+        lore = WizardLore()
+        assert lore.echo is None
 
 
 class TestExtractSection:
@@ -140,3 +171,87 @@ class TestExtractParser:
             name: Annotated[str, "unrelated"] = "x"
 
         assert extract_parser(M.model_fields["name"]) is None
+
+
+class TestPickerContext:
+    def test_fields_are_accessible(self):
+        ctx = PickerContext(name="color", description="A hex color", default="#ff0000", hint="e.g. #aabbcc")
+        assert ctx.name == "color"
+        assert ctx.description == "A hex color"
+        assert ctx.default == "#ff0000"
+        assert ctx.hint == "e.g. #aabbcc"
+
+    def test_optional_fields_default_to_none(self):
+        ctx = PickerContext(name="color", description=None, default=None, hint=None)
+        assert ctx.description is None
+        assert ctx.default is None
+        assert ctx.hint is None
+
+    def test_immutable(self):
+        ctx = PickerContext(name="color", description=None, default=None, hint=None)
+        with pytest.raises(Exception):
+            ctx.name = "other"  # type: ignore
+
+
+class TestExtractPicker:
+    def test_with_picker(self):
+        def my_picker(ctx: PickerContext) -> str:
+            return "#000000"
+
+        class M(BaseModel):
+            color: Annotated[str, WizardLore(picker=my_picker)] = "#ffffff"
+
+        result = extract_picker(M.model_fields["color"])
+        assert result is my_picker
+
+    def test_without_picker(self):
+        class M(BaseModel):
+            name: str = "x"
+
+        assert extract_picker(M.model_fields["name"]) is None
+
+    def test_wizard_lore_with_no_picker(self):
+        class M(BaseModel):
+            name: Annotated[str, WizardLore()] = "x"
+
+        assert extract_picker(M.model_fields["name"]) is None
+
+    def test_no_wizard_lore_in_metadata(self):
+        class M(BaseModel):
+            name: Annotated[str, "unrelated"] = "x"
+
+        assert extract_picker(M.model_fields["name"]) is None
+
+
+class TestExtractEcho:
+    def test_with_echo_true(self):
+        class M(BaseModel):
+            name: Annotated[str, WizardLore(echo=True)] = "x"
+
+        assert extract_echo(M.model_fields["name"]) is True
+
+    def test_with_echo_false(self):
+        class M(BaseModel):
+            name: Annotated[str, WizardLore(echo=False)] = "x"
+
+        assert extract_echo(M.model_fields["name"]) is False
+
+    def test_without_echo(self):
+        class M(BaseModel):
+            name: str = "x"
+
+        assert extract_echo(M.model_fields["name"]) is None
+
+    def test_wizard_lore_with_no_echo(self):
+        """WizardLore with echo=None returns None — defers to wizard-level default."""
+
+        class M(BaseModel):
+            name: Annotated[str, WizardLore()] = "x"
+
+        assert extract_echo(M.model_fields["name"]) is None
+
+    def test_no_wizard_lore_in_metadata(self):
+        class M(BaseModel):
+            name: Annotated[str, "unrelated"] = "x"
+
+        assert extract_echo(M.model_fields["name"]) is None

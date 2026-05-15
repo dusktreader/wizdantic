@@ -456,3 +456,23 @@ class TestIsUnsupportedUnion:
     def test_multi_type_with_none(self):
         """str | int | None is still unsupported -- two non-None branches."""
         assert is_unsupported_union(str | int | None) is True
+
+
+class TestUnwrapTupleNoArgs:
+    def test_parameterized_tuple_with_empty_args_defaults_to_str_homogeneous(self):
+        """tuple[()] has origin=tuple but no type args; treated as bare homogeneous str tuple."""
+        result = unwrap_tuple(tuple[()])
+        assert result == ([str], True)
+
+
+class TestUnwrapDictBare:
+    def test_bare_dict_returns_str_str(self):
+        """Bare `dict` without type args defaults to (str, str)."""
+        assert unwrap_dict(dict) == (str, str)
+
+
+class TestParseJsonDictKeyError:
+    def test_invalid_key_type_raises(self):
+        """A key that fails TypeAdapter validation raises ValueError with 'Invalid key' message."""
+        with pytest.raises(ValueError, match="Invalid key"):
+            parse_json_dict('{"notanint": "value"}', int, str)

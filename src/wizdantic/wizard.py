@@ -5,11 +5,13 @@ Uses Rich prompts to walk the user through each field, validating as they go
 and insisting on values for required fields.
 """
 
+from collections.abc import Callable
 from enum import Enum
 from typing import Annotated, Any, Generic, TypeVar
 
 import buzz
 import inflection
+import pydantic
 import snick
 from pydantic import BaseModel, SecretStr
 from pydantic.fields import FieldInfo
@@ -21,7 +23,7 @@ from rich.table import Table
 
 from wizdantic.console import WizardConsole
 from wizdantic.exceptions import UnsupportedFieldType, WizardAborted
-from wizdantic.lore import extract_hint, extract_parser, extract_section
+from wizdantic.lore import extract_echo, extract_hint, extract_parser, extract_picker, extract_section, PickerContext
 from wizdantic.prompts import (
     BoolPrompt,
     DictPrompt,
@@ -32,6 +34,7 @@ from wizdantic.prompts import (
     SetPrompt,
     TuplePrompt,
     ValuePrompt,
+    prompt_picker,
     validated_parser,
 )
 from wizdantic.type_utils import (
@@ -54,6 +57,8 @@ def run_wizard(
     console: Console | None = None,
     title: str | None = None,
     show_summary: bool = True,
+    default_picker: Callable[[PickerContext], str] | None = None,
+    echo_picker: bool = False,
 ) -> _ModelT:
     """
     Run an interactive wizard and return a populated model instance.
@@ -61,14 +66,26 @@ def run_wizard(
     This is a convenience wrapper around `Wizard(...).run()`.
 
     Parameters:
-        model_class:  The Pydantic model class to populate.
-        instance:     An existing model instance whose field values are used as
-                      defaults. When provided, each prompt is pre-filled with
-                      the current value on the instance rather than the field's
-                      declared default.
-        console:      Rich console for output. A new one is created if omitted.
-        title:        Heading displayed at the top of the wizard.
-        show_summary: Show a summary table after collection. Defaults to True.
+        model_class:    The Pydantic model class to populate.
+        instance:       An existing model instance whose field values are used as
+                        defaults. When provided, each prompt is pre-filled with
+                        the current value on the instance rather than the field's
+                        declared default.
+        console:        Rich console for output. A new one is created if omitted.
+        title:          Heading displayed at the top of the wizard.
+        show_summary:   Show a summary table after collection. Defaults to True.
+        default_picker: A callable `(PickerContext) -> str` used for every field
+                        that does not have its own `WizardLore(picker=...)`.
+                        When `None`, the built-in `prompt_picker` (wrapping
+                        `rich.prompt.Prompt.ask`) is used.
+        echo_picker:    When `True`, wizdantic prints the field label and
+                        validated value to the console after every custom picker
+                        returns. Useful for pickers like Textual TUI apps that
+                        take over the screen and leave no visible record of the
+                        selection. Has no effect on fields using the built-in
+                        `prompt_picker` — those handle their own output.
+                        Defaults to `False`. Per-field `WizardLore(echo=...)` takes
+                        priority over this setting.
 
     Returns:
         A validated instance of `model_class` populated with the collected values.
@@ -79,6 +96,8 @@ def run_wizard(
         console=console,
         title=title,
         show_summary=show_summary,
+        default_picker=default_picker,
+        echo_picker=echo_picker,
     ).run()
 
 
@@ -88,14 +107,22 @@ class Wizard(Generic[_ModelT]):
     validating values interactively via Rich prompts.
 
     Parameters:
-        model_class:  The Pydantic model class to populate.
-        instance:     An existing model instance whose field values are used as
-                      defaults. When provided, each prompt is pre-filled with
-                      the current value on the instance rather than the field's
-                      declared default.
-        console:      Rich console for output. A new one is created if omitted.
-        title:        Heading displayed at the top of the wizard.
-        show_summary: Show a summary table after collection. Defaults to True.
+        model_class:    The Pydantic model class to populate.
+        instance:       An existing model instance whose field values are used as
+                        defaults. When provided, each prompt is pre-filled with
+                        the current value on the instance rather than the field's
+                        declared default.
+        console:        Rich console for output. A new one is created if omitted.
+        title:          Heading displayed at the top of the wizard.
+        show_summary:   Show a summary table after collection. Defaults to True.
+        default_picker: A callable `(PickerContext) -> str` applied to every
+                        field that does not have its own `WizardLore(picker=...)`.
+                        When `None`, the built-in `prompt_picker` is used.
+        echo_picker:    When `True`, wizdantic prints the field label and
+                        validated value to the console after every custom picker
+                        returns. Has no effect on fields using the built-in
+                        `prompt_picker`. Defaults to `False`. Per-field
+                        `WizardLore(echo=...)` takes priority over this setting.
     """
 
     def __init__(
@@ -106,12 +133,16 @@ class Wizard(Generic[_ModelT]):
         console: Console | None = None,
         title: str | None = None,
         show_summary: bool = True,
+        default_picker: Callable[[PickerContext], str] | None = None,
+        echo_picker: bool = False,
     ):
         self.model_class = model_class
         self._instance = instance
         self.console = console or WizardConsole()
         self.title = title
         self.show_summary = show_summary
+        self._default_picker: Callable[[PickerContext], str] = default_picker or prompt_picker
+        self._echo_picker = echo_picker
         self._validate_fields()
 
     def _validate_fields(self) -> None:
@@ -418,11 +449,31 @@ class Wizard(Generic[_ModelT]):
         lore_hint = extract_hint(field_info)
         lore_parser = extract_parser(field_info)
         if lore_parser is not None:
-            if field_info.metadata:
-                validated_annotation = Annotated.__getitem__((annotation, *field_info.metadata))
-            else:
-                validated_annotation = annotation
+            validated_annotation = Annotated.__getitem__((annotation, *field_info.metadata))
             lore_parser = validated_parser(lore_parser, validated_annotation)
+
+        field_picker = extract_picker(field_info)
+        active_picker = field_picker or (
+            self._default_picker if self._default_picker is not prompt_picker else None
+        )
+        if active_picker is not None:
+            ctx = PickerContext(
+                name=name,
+                description=field_info.description,
+                default=default,
+                hint=lore_hint,
+            )
+            raw = active_picker(ctx)
+            if lore_parser is not None:
+                value = lore_parser(raw)
+            else:
+                adapter = pydantic.TypeAdapter(annotation)
+                value = adapter.validate_python(raw)
+            field_echo = extract_echo(field_info)
+            echo = field_echo if field_echo is not None else self._echo_picker
+            if echo:
+                self.console.print(f"{label}: [green]{self._format_display(value)}[/green]")
+            return value
 
         # list[T]
         list_item_type = unwrap_list(effective_annotation)

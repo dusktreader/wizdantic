@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field, SecretStr
 from rich.console import Console
 
 from wizdantic.exceptions import UnsupportedFieldType
-from wizdantic.lore import WizardLore
+from wizdantic.lore import PickerContext, WizardLore
 from pydantic_core import PydanticUndefined
 from wizdantic.wizard import Wizard, WizardAborted, run_wizard
 
@@ -1562,3 +1562,417 @@ class TestWizardInstance:
         assert result.name == "Elara Nighthollow"
         assert result.mana_reserve == 200
         assert result.has_familiar is True
+
+
+class TestWizardPicker:
+    """Tests for the picker short-circuit in _prompt_field."""
+
+    def test_field_level_picker_is_called(self, console):
+        """A WizardLore(picker=...) on a field bypasses Prompt.ask entirely."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Veyra"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker)] = Field(description="Crew name")
+
+        result = run_wizard(Crew, console=console, show_summary=False)
+        assert result.name == "Veyra"
+
+    def test_field_picker_receives_correct_context(self, console):
+        """The PickerContext passed to the picker has the expected field metadata."""
+        captured: list[PickerContext] = []
+
+        def capture_picker(ctx: PickerContext) -> str:
+            captured.append(ctx)
+            return "Theron"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=capture_picker, hint="full name")] = Field(
+                description="Crew name", default="Anonymous"
+            )
+
+        run_wizard(Crew, console=console, show_summary=False)
+
+        assert len(captured) == 1
+        ctx = captured[0]
+        assert ctx.name == "name"
+        assert ctx.description == "Crew name"
+        assert ctx.default == "Anonymous"
+        assert ctx.hint == "full name"
+
+    def test_default_picker_used_when_no_field_picker(self, console):
+        """default_picker on the wizard fires for fields with no field-level picker."""
+        calls: list[str] = []
+
+        def my_default_picker(ctx: PickerContext) -> str:
+            calls.append(ctx.name)
+            return "Aldric"
+
+        class Crew(BaseModel):
+            name: str = Field(description="Crew name")
+
+        result = run_wizard(Crew, console=console, show_summary=False, default_picker=my_default_picker)
+        assert result.name == "Aldric"
+        assert "name" in calls
+
+    def test_field_picker_overrides_default_picker(self, console):
+        """Field-level picker wins over the wizard-level default_picker."""
+        default_calls: list[str] = []
+        field_calls: list[str] = []
+
+        def default_picker(ctx: PickerContext) -> str:
+            default_calls.append(ctx.name)
+            return "from_default"
+
+        def field_picker(ctx: PickerContext) -> str:
+            field_calls.append(ctx.name)
+            return "from_field"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=field_picker)] = Field(description="Crew name")
+
+        result = run_wizard(
+            Crew, console=console, show_summary=False, default_picker=default_picker
+        )
+        assert result.name == "from_field"
+        assert field_calls == ["name"]
+        assert default_calls == []
+
+    def test_picker_with_lore_parser(self, console):
+        """When a picker and a lore parser are both set, the parser post-processes the raw string."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "42"
+
+        def parse_int(raw: str) -> int:
+            return int(raw)
+
+        class Quest(BaseModel):
+            level: Annotated[int, WizardLore(picker=my_picker, parser=parse_int)] = Field(
+                description="Level"
+            )
+
+        result = run_wizard(Quest, console=console, show_summary=False)
+        assert result.level == 42
+
+    def test_prompt_picker_as_default_picker_is_no_op(self, mocker, console):
+        """Passing prompt_picker explicitly as default_picker falls through to normal dispatch."""
+        from wizdantic.prompts import prompt_picker
+
+        mocker.patch("wizdantic.prompts.Prompt.ask", return_value="Seraphina")
+
+        class Crew(BaseModel):
+            name: str = Field(description="Crew name")
+
+        result = run_wizard(Crew, console=console, show_summary=False, default_picker=prompt_picker)
+        assert result.name == "Seraphina"
+
+
+class TestWizardPickerEcho:
+    """Tests for echo behaviour after picker returns a value."""
+
+    def test_no_echo_by_default(self, console):
+        """Without echo_picker or WizardLore(echo=True), picker result is silent."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Orlen"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker)] = Field(description="Crew name")
+
+        run_wizard(Crew, console=console, show_summary=False)
+        output = console.file.getvalue()
+        assert "Orlen" not in output
+
+    def test_wizard_level_echo_picker_prints_value(self, console):
+        """echo_picker=True on run_wizard causes the returned value to be echoed."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Orlen"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker)] = Field(description="Crew name")
+
+        run_wizard(Crew, console=console, show_summary=False, echo_picker=True)
+        output = console.file.getvalue()
+        assert "Orlen" in output
+
+    def test_field_level_echo_true_overrides_wizard_false(self, console):
+        """WizardLore(echo=True) echoes even when wizard-level echo_picker=False."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Veyra"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker, echo=True)] = Field(
+                description="Crew name"
+            )
+
+        run_wizard(Crew, console=console, show_summary=False, echo_picker=False)
+        output = console.file.getvalue()
+        assert "Veyra" in output
+
+    def test_field_level_echo_false_suppresses_wizard_echo(self, console):
+        """WizardLore(echo=False) suppresses echo even when wizard-level echo_picker=True."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Theron"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker, echo=False)] = Field(
+                description="Crew name"
+            )
+
+        run_wizard(Crew, console=console, show_summary=False, echo_picker=True)
+        output = console.file.getvalue()
+        assert "Theron" not in output
+
+    def test_echo_includes_label(self, console):
+        """Echoed output contains the field label as well as the value."""
+
+        def my_picker(ctx: PickerContext) -> str:
+            return "Elara"
+
+        class Crew(BaseModel):
+            name: Annotated[str, WizardLore(picker=my_picker, echo=True)] = Field(
+                description="Crew name"
+            )
+
+        run_wizard(Crew, console=console, show_summary=False)
+        output = console.file.getvalue()
+        assert "Crew name" in output
+        assert "Elara" in output
+
+
+class TestWizardValidateFields:
+    """Tests for _validate_fields rejections at construction time."""
+
+    def test_non_frozen_base_model_in_set_raises(self):
+        """A set[BaseModel] whose item type is not frozen raises UnsupportedFieldType."""
+        from wizdantic.exceptions import UnsupportedFieldType
+
+        class MutablePoint(BaseModel):
+            x: float = 0.0
+
+        class BadModel(BaseModel):
+            points: set[MutablePoint] = Field(description="Points", default_factory=set)
+
+        with pytest.raises(UnsupportedFieldType):
+            Wizard(BadModel)
+
+    def test_frozen_base_model_in_set_is_accepted(self):
+        """A set[FrozenBaseModel] passes _validate_fields without error."""
+        from pydantic import ConfigDict
+
+        class FrozenPoint(BaseModel):
+            model_config = ConfigDict(frozen=True)
+            x: float = 0.0
+
+        class GoodModel(BaseModel):
+            points: set[FrozenPoint] = Field(description="Points", default_factory=set)
+
+        # Should not raise.
+        Wizard(GoodModel)
+
+
+class TestWizardFormatDisplay:
+    """Tests for _format_display edge cases."""
+
+    def test_non_empty_dict_renders_kv_pairs(self, console):
+        """A non-empty dict is displayed as comma-separated key:value pairs."""
+        wiz = Wizard(MageProfile, console=console)
+        result = wiz._format_display({"ember": "fire", "frost": "ice"})
+        assert isinstance(result, str)
+        assert "ember:fire" in result
+        assert "frost:ice" in result
+
+    def test_empty_dict_renders_empty_marker(self, console):
+        """An empty dict renders as the dim (empty) marker."""
+        wiz = Wizard(MageProfile, console=console)
+        result = wiz._format_display({})
+        assert isinstance(result, str)
+        assert "(empty)" in result
+
+    def test_empty_list_renders_empty_marker(self, console):
+        """An empty list renders as the dim (empty) marker."""
+        wiz = Wizard(MageProfile, console=console)
+        result = wiz._format_display([])
+        assert isinstance(result, str)
+        assert "(empty)" in result
+
+    def test_empty_tuple_renders_empty_marker(self, console):
+        """An empty tuple renders as the dim (empty) marker."""
+        wiz = Wizard(MageProfile, console=console)
+        result = wiz._format_display(())
+        assert isinstance(result, str)
+        assert "(empty)" in result
+
+    def test_empty_set_renders_empty_marker(self, console):
+        """An empty set renders as the dim (empty) marker."""
+        wiz = Wizard(MageProfile, console=console)
+        result = wiz._format_display(set())
+        assert isinstance(result, str)
+        assert "(empty)" in result
+
+
+class TestWizardNestedModelNoDescription:
+    """Tests for _prompt_nested_model when the field has no description."""
+
+    def test_nested_model_field_without_description(self, mocker, console):
+        """When a nested BaseModel field has no description, the field name is used as the title."""
+
+        class Inner(BaseModel):
+            value: str = Field(description="Value")
+
+        class Outer(BaseModel):
+            # No Field(description=...) — just a plain annotation
+            inner: Inner
+
+        mocker.patch("wizdantic.prompts.Prompt.ask", return_value="hello")
+
+        result = run_wizard(Outer, console=console, show_summary=False)
+        assert result.inner.value == "hello"
+
+
+class TestWizardNestedFixedTuple:
+    """Tests for _prompt_nested_fixed_tuple (fixed-length tuples containing BaseModel positions)."""
+
+    def test_fixed_tuple_with_model_position(self, mocker, console):
+        """A fixed tuple[BaseModel, str] prompts a sub-wizard for the model position."""
+
+        class Tag(BaseModel):
+            label: str = Field(description="Tag label")
+
+        class Tagged(BaseModel):
+            entry: tuple[Tag, str] = Field(description="Tagged entry")
+
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=[
+                "arcane",   # Tag.label (sub-wizard)
+                "extra",    # position 2: str
+            ],
+        )
+
+        result = run_wizard(Tagged, console=console, show_summary=False)
+        assert result.entry[0].label == "arcane"
+        assert result.entry[1] == "extra"
+
+
+class TestWizardNestedDict:
+    """Tests for _prompt_nested_dict (dict[K, BaseModel] fields)."""
+
+    def test_dict_of_models_via_sub_wizard(self, mocker, console):
+        """A dict[str, BaseModel] field prompts for keys and runs sub-wizards for values."""
+
+        class Port(BaseModel):
+            planet: str = Field(description="Planet")
+
+        class Ports(BaseModel):
+            routes: dict[str, Port] = Field(description="Routes")
+
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=[
+                "alpha",     # key 1
+                "Coruscant",  # Port.planet for key 1
+            ],
+        )
+        mocker.patch("wizdantic.prompts.Confirm.ask", return_value=False)
+
+        result = run_wizard(Ports, console=console, show_summary=False)
+        assert "alpha" in result.routes
+        assert result.routes["alpha"].planet == "Coruscant"
+
+    def test_dict_of_models_multiple_entries(self, mocker, console):
+        """Multiple key/model pairs are collected when the user confirms to continue."""
+
+        class Port(BaseModel):
+            planet: str = Field(description="Planet")
+
+        class Ports(BaseModel):
+            routes: dict[str, Port] = Field(description="Routes")
+
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=[
+                "alpha", "Coruscant",
+                "beta",  "Tatooine",
+            ],
+        )
+        mocker.patch("wizdantic.prompts.Confirm.ask", side_effect=[True, False])
+
+        result = run_wizard(Ports, console=console, show_summary=False)
+        assert len(result.routes) == 2
+        assert result.routes["beta"].planet == "Tatooine"
+
+
+class TestWizardLoreParserNoMetadata:
+    """Tests for the lore_parser path when field_info.metadata is empty."""
+
+    def test_parser_on_plain_annotated_field(self, mocker, console):
+        """A WizardLore parser on a plain (non-Annotated) field uses annotation directly."""
+
+        def shout(raw: str) -> str:
+            return raw.upper()
+
+        # Use Field() so description is set, but attach WizardLore separately via Annotated.
+        # The key is that pydantic strips metadata from bare fields — to reproduce the
+        # no-metadata branch we use a field with no extra Annotated metadata beyond WizardLore.
+        class Shout(BaseModel):
+            word: Annotated[str, WizardLore(parser=shout)]
+
+        mocker.patch("wizdantic.prompts.Prompt.ask", return_value="hello")
+
+        result = run_wizard(Shout, console=console, show_summary=False)
+        assert result.word == "HELLO"
+
+
+class TestWizardTupleOfModels:
+    """Tests for tuple[BaseModel, ...] (homogeneous) and tuple[BaseModel, T] (fixed) dispatch."""
+
+    def test_homogeneous_tuple_of_models(self, mocker, console):
+        """tuple[BaseModel, ...] collects items via repeated sub-wizards."""
+
+        class Station(BaseModel):
+            name: str = Field(description="Station name")
+
+        class Network(BaseModel):
+            stations: tuple[Station, ...] = Field(description="Stations")
+
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["Alpha", "Beta"],
+        )
+        mocker.patch("wizdantic.prompts.Confirm.ask", side_effect=[True, False])
+
+        result = run_wizard(Network, console=console, show_summary=False)
+        assert len(result.stations) == 2
+        assert result.stations[0].name == "Alpha"
+        assert result.stations[1].name == "Beta"
+
+
+class TestWizardSetOfModels:
+    """Tests for set[FrozenBaseModel] collection dispatch."""
+
+    def test_set_of_frozen_models(self, mocker, console):
+        """set[FrozenBaseModel] collects items via repeated sub-wizards and returns a set."""
+        from pydantic import ConfigDict
+
+        class FrozenTag(BaseModel):
+            model_config = ConfigDict(frozen=True)
+            label: str = Field(description="Tag label")
+
+        class Tagged(BaseModel):
+            tags: set[FrozenTag] = Field(description="Tags", default_factory=set)
+
+        mocker.patch(
+            "wizdantic.prompts.Prompt.ask",
+            side_effect=["arcane", "shadow"],
+        )
+        mocker.patch("wizdantic.prompts.Confirm.ask", side_effect=[True, False])
+
+        result = run_wizard(Tagged, console=console, show_summary=False)
+        labels = {t.label for t in result.tags}
+        assert labels == {"arcane", "shadow"}
